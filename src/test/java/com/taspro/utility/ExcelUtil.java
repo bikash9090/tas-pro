@@ -13,7 +13,7 @@ public class ExcelUtil {
 
 	public String[][] readExcel(String sheetName) {
 		
-		String path = System.getProperty("user.dir")+"src\\test\\resources\\TAS-2_Employee_data.xlsx";
+		String path = System.getProperty("user.dir")+"\\src\\test\\resources\\TAS-2_Employee_data.xlsx";
 	
 		try {
 			FileInputStream fis = new FileInputStream(path);
