@@ -8,8 +8,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
-	WebDriverWait wait;
+	
 	public WebDriver driver;
+	WebDriverWait wait;
 	
 
 	/*-------------------------------------------Page initialization----------------------------------------------*/
