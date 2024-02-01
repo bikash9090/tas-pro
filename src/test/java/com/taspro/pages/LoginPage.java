@@ -8,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.taspro.base.PageBase;
 
 public class LoginPage extends PageBase {
-	WebDriver driver;
-
+	
+	
 	/*------------------------------------------------Page objects----------------------------------------------*/
 	@FindBy(xpath = "//input[@placeholder='Email']")
 	WebElement emailfield;
@@ -23,11 +23,13 @@ public class LoginPage extends PageBase {
 	@FindBy(xpath="//snack-bar-container[@class='mat-snack-bar-container ng-tns-c47-14 ng-trigger ng-trigger-state mat-snack-bar-center ng-star-inserted']")
 	WebElement errorMessage;
 	
+	@FindBy(xpath="//a[@class='txt2']")
+	WebElement forgotPassword;
+	
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	
 	public LoginPage(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -43,5 +45,9 @@ public class LoginPage extends PageBase {
 		errorMessage.getText();
 		
 	}
+	public void clickOnForgotPassword() {
+		scrollAndClick(forgotPassword);
+	}
+	
 	
 }
