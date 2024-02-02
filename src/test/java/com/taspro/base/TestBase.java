@@ -13,7 +13,7 @@ public class TestBase {
 	public PropertiesUtil readpropobj;
 
 	
-	public void initiDriver() {
+	public void initDriver() {
 		readpropobj = new PropertiesUtil();
 		WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver();
@@ -21,6 +21,10 @@ public class TestBase {
 		driver.manage().window().maximize();
 		readpropobj = new PropertiesUtil();
 		
+	}
+	
+	public void destroyDriver() {
+		driver.quit();
 	}
 
 }
