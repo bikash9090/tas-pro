@@ -6,34 +6,35 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesUtil {
-	Properties pro;
+	Properties prop;
 
 	public PropertiesUtil() {
+		
+		String path = System.getProperty("usre.dir")+"\\src\\test\\resources\\config.properties";
 		FileInputStream filepa;
-		pro = new Properties();
+		prop = new Properties();
+		
 		try {
-			filepa = new FileInputStream(
-					"C:\\Users\\dipak\\git\\tas-pro\\src\\test\\resources\\config.properties");
-			pro.load(filepa);
+			filepa = new FileInputStream(path);	// Established the stream connection with properties file.
+			prop.load(filepa);					// Loaded the inputStrem of properties file.
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("The properties file not found! on the path : "+path);
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("IO exception occured! during operation on the file : "+path);
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 	public String getemail() {
-		return pro.getProperty("email");
+		return prop.getProperty("email");
 	}
 
 	public String getpassword() {
-		return pro.getProperty("password");
+		return prop.getProperty("password");
 	}
+	
 	public String getUrl() {
-		return pro.getProperty("url");
+		return prop.getProperty("url");
 	}
 }
