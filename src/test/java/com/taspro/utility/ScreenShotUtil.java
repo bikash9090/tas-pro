@@ -1,7 +1,9 @@
 package com.taspro.utility;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +17,9 @@ public class ScreenShotUtil {
 		this.driver = driver;
 	}
 	
-	public void takeScreenShot() {
+	public void takeScreenShot() throws IOException {
 		File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		
+		FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\src\\test\\java\\com\\taspro\\utility\\ScreenshotUtil\\screenshot.png"));
 	}
 
 }
