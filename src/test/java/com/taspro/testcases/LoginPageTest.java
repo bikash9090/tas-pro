@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 
 import com.taspro.base.TestBase;
 import com.taspro.pages.LoginPage;
-import com.taspro.utility.PropertiesUtil;
 
 public class LoginPageTest extends TestBase {
 
@@ -15,15 +14,13 @@ public class LoginPageTest extends TestBase {
 
 	@BeforeMethod
 	public void openBrowser() {
-		initiDriver();
+		initDriver();
 		lpagloginpageObj = new LoginPage(driver);
-		
-		
 	}
 	
 	@AfterMethod
 	public void closeBrowser() {
-		driver.quit();
+		destroyDriver();
 	}
 
 	@Test
