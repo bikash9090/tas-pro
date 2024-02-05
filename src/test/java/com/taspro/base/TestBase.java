@@ -41,7 +41,7 @@ public class TestBase {
 			options.addPreference("geo.prompt.testing", true);
 			options.addPreference("geo.prompt.testing.allow", true);
 			options.addPreference("geo.provider.testing", true);
-		options.addPreference("geo.provider.testing.allow", true);
+			options.addPreference("geo.provider.testing.allow", true);
 
 			driver = new FirefoxDriver(options);
 
