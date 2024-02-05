@@ -9,8 +9,9 @@ public class PropertiesUtil {
 	Properties pro;
 
 	public PropertiesUtil() {
-		FileInputStream filepa;
+	
 		pro = new Properties();
+		FileInputStream filepa;
 		try {
 			filepa = new FileInputStream(
 					"C:\\Users\\dipak\\git\\tas-pro\\src\\test\\resources\\config.properties");
@@ -34,6 +35,9 @@ public class PropertiesUtil {
 		return pro.getProperty("password");
 	}
 	public String getUrl() {
-		return pro.getProperty("url");
+		 return pro.getProperty("url");
+	}
+	public String getBrowser() {
+		return pro.getProperty("browser");
 	}
 }

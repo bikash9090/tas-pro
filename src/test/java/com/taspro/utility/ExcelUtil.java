@@ -31,7 +31,7 @@ public class ExcelUtil {
 		int lastRow = sheet.getLastRowNum();
 		int lastCell = sheet.getRow(lastRow).getLastCellNum();
 
-		String[][] empDetail = new String[lastRow][lastCell]; // Create 2 dimensional array to store excel sheet data.
+		String[][] empDetail = new String[lastRow][lastCell]; // Created 2 dimensional array to store excel sheet data.
 
 		for (int i = 0; i < lastRow; i++) {
 			for (int j = 0; j < lastCell; j++) {
