@@ -9,16 +9,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
 	
-	private WebDriver driver;
+	public WebDriver driver;
 	WebDriverWait wait;
 	
 
-	/*----------------------------------PageBase initialization---------------------------------------*/
+	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public PageBase(WebDriver driver) {
 		this.driver=driver;
 		
 	}
-	/*--------------------------Common Actions performed on the webPage--------------------------------*/
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 	protected void scrollAndEnterText(WebElement element, String text) {
 		element.sendKeys(text);
 	}
