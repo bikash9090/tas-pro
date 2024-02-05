@@ -3,22 +3,23 @@ package com.taspro.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import com.taspro.base.PageBase;
 
 public class OnBoardingPage extends PageBase {
 
-	WebDriver driver;
-
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
 		super(driver);
-		this.driver = driver;
+		PageFactory.initElements(driver, this);
 
 	}
 
 	/*------------------------------------------------Page objects----------------------------------------------*/
+	
+	
 	@FindBy(xpath = "//i[@class='bi bi-plus']")
 	WebElement addCandiateButton;
 
@@ -52,11 +53,11 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(id = "mat-select-value-13")
 	WebElement selectNoticePeriod;
 
-	@FindBy(className = "me-2 btn btn-primary ng-star-inserted")
+	@FindBy(xpath="/html/body/div[2]/div[2]/div/mat-dialog-container/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
 	WebElement submitOnBoardingForm;
 
 	/*---------------------------------------Custom actions---------------------------------------------------*/
-	public void clickAddCandiate() {
+	public void clickAddCandiateButton() {
 		scrollAndClick(addCandiateButton);
 	}
 	public void enterCandidateName(String name) {
