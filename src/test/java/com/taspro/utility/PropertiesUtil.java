@@ -5,12 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.taspro.base.Constants;
+
 public class PropertiesUtil {
 	Properties pro;
 
 	public PropertiesUtil() {
 
-		String path = System.getProperty("user.dir") + "\\src\\test\\resources\\config.properties";
+		String path = Constants.PROPERTIES_FILE_PATH;
 		FileInputStream filepa;
 		pro = new Properties();
 		
