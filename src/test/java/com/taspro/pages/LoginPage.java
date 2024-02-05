@@ -17,7 +17,7 @@ public class LoginPage extends PageBase {
 	@FindBy(xpath = "//input[@placeholder='enter password']")
 	WebElement passwordfield;
 
-	@FindBy(className = "login100-form-btn")
+	@FindBy(xpath = "/html/body/app-root/app-login/div/div[1]/div/form/div[3]/button")
 	WebElement loginButton;
 	
 	@FindBy(xpath="//snack-bar-container[@class='mat-snack-bar-container ng-tns-c47-14 ng-trigger ng-trigger-state mat-snack-bar-center ng-star-inserted']")
