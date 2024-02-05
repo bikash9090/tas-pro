@@ -15,7 +15,8 @@ public class PageBase {
 
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public PageBase(WebDriver driver) {
-		this.driver=driver;
+	this.driver=driver;
+	initWait();
 		
 	}
 /*----------------------------------------------------------------------------------------------------------------------------------*/
@@ -26,7 +27,7 @@ public class PageBase {
 	protected void scrollAndClick(WebElement element) {
 		element.click();
 	}
-	protected void justWait() {
+	protected void initWait() {
 		 wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		}
 	
@@ -34,6 +35,13 @@ public class PageBase {
 		   wait.until(ExpectedConditions.visibilityOf(element));
       
 }
+	public void waitForElemetTBeClickable(WebElement element) {
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	public void waitForElementTobeInvisible(WebElement element) {
+		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+	
 	
 	
 }
