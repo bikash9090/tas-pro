@@ -10,6 +10,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
+import com.taspro.base.Constants;
+
 public class ScreenShotUtil {
 	
 	WebDriver driver;
@@ -24,8 +26,8 @@ public class ScreenShotUtil {
 	public void takeScreenShot() throws IOException {
 		File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\src\\test\\java\\com\\taspro\\utility\\ScreenshotUtil\\screenshot.png"));
-		
-		FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\Screenshots\\"+timeStamp+"screenshot.png"));
+		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\Screenshots\\"+timeStamp+"screenshot.png"));
+		FileUtils.copyFile(f, new File(Constants.SCREENSHOT_DIR+timeStamp+"screenshot.png"));
 
 	}
 
