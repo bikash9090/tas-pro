@@ -17,38 +17,35 @@ public class TestBase {
 	String browser = readpropobj.getBrowser();
 	String url = readpropobj.getUrl();
 
-	/*------------------------------------------------Browser Setup----------------------------------------------*/
-	public WebDriver setUp(){
-		if(browser.equalsIgnoreCase("chrome")) {
+	/*----------------------------------------Browser Setup----------------------------------------------*/
+	public WebDriver setUpBrowser() {
+		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();	
-			
+			driver = new ChromeDriver();
+
+		} else if (browser.equalsIgnoreCase("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+
+		} else if (browser.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+
 		}
-			else if (browser.equalsIgnoreCase("firefox")){
-				WebDriverManager.firefoxdriver().setup();
-				driver = new FirefoxDriver();
-				
-			}
-				else if(browser.equalsIgnoreCase("edge")) {
-					WebDriverManager.edgedriver().setup();
-					driver = new EdgeDriver();	
-				
-				}
-		driver.manage().window().maximize();
 		return driver;
-				
-			}
-	/*------------------------------------------------LAUNCHING THE WEBSITE----------------------------------------------*/
-	public void  launchWebSite() {
-        driver =setUp();
-		driver.get(url);
-		
-	}
-	/*------------------------------------------------CLOSING THE BROWSER----------------------------------------------*/
-	public void tearDown() {
-		driver.close();
 
 	}
-		
+
+	/*------------------------------------LAUNCHING THE WEBSITE--------------------------------------------*/
+	public void launchWebSite() {
+		driver = setUpBrowser();
+		driver.get(url);
+		driver.manage().window().maximize();
+	}
+
+	/*-------------------------------------CLOSING THE BROWSER----------------------------------------------*/
+	public void tearDown() {
+		driver.close();
+	}
 
 }
