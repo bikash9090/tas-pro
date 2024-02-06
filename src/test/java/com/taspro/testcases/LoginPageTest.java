@@ -11,9 +11,6 @@ public class LoginPageTest extends TestBase {
 	LoginPage lpagloginpageObj;
 	
 	
-	
-	
-	
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
@@ -37,20 +34,4 @@ public class LoginPageTest extends TestBase {
 		lpagloginpageObj.clickOnForgotPassword();
 	}
 	
-	
-	
-	
-
-//	@Test
-//	public void readexcel () {
-//		ExcelUtil obj = new ExcelUtil();
-//		String a[][]= obj.readExcel("empSheet");
-//		for(int i=0;i<a.length;i++) {
-//			for(int j=0;j<a[i].length;j++) {
-//				System.out.print(a[i][j]+" ");
-//			}
-//			System.out.println();
-//		}
-//		
-//	}
 }
