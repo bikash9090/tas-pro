@@ -5,16 +5,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import com.taspro.base.Constants;
+
 public class PropertiesUtil {
 	Properties pro;
 
 	public PropertiesUtil() {
-	
-		pro = new Properties();
+
+		String path = Constants.PROPERTIES_FILE_PATH;
 		FileInputStream filepa;
+		pro = new Properties();
+    
 		try {
-			filepa = new FileInputStream(
-					"C:\\Users\\dipak\\git\\tas-pro\\src\\test\\resources\\config.properties");
+			filepa = new FileInputStream(path);
 			pro.load(filepa);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -23,8 +26,7 @@ public class PropertiesUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public String getemail() {
@@ -34,9 +36,11 @@ public class PropertiesUtil {
 	public String getpassword() {
 		return pro.getProperty("password");
 	}
+
 	public String getUrl() {
-		 return pro.getProperty("url");
+		return pro.getProperty("url");
 	}
+
 	public String getBrowser() {
 		return pro.getProperty("browser");
 	}

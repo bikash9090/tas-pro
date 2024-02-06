@@ -12,19 +12,19 @@ public class LoginPage extends PageBase {
 	
 	/*------------------------------------------------Page objects----------------------------------------------*/
 	@FindBy(xpath = "//input[@placeholder='Email']")
-	WebElement emailfield;
+	private WebElement emailfield;
 
 	@FindBy(xpath = "//input[@placeholder='enter password']")
-	WebElement passwordfield;
+	private WebElement passwordfield;
 
 	@FindBy(xpath = "/html/body/app-root/app-login/div/div[1]/div/form/div[3]/button")
-	WebElement loginButton;
+	private WebElement loginButton;
 	
 	@FindBy(xpath="//snack-bar-container[@class='mat-snack-bar-container ng-tns-c47-14 ng-trigger ng-trigger-state mat-snack-bar-center ng-star-inserted']")
-	WebElement errorMessage;
+	private WebElement errorMessage;
 	
 	@FindBy(xpath="//a[@class='txt2']")
-	WebElement forgotPassword;
+	private WebElement forgotPassword;
 	
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	

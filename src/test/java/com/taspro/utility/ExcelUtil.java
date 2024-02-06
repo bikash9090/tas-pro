@@ -7,13 +7,16 @@ import java.io.IOException;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.taspro.base.Constants;
+
 public class ExcelUtil {
 
 	XSSFWorkbook workbook;
 
 	public String[][] readExcel(String sheetName) {
 		
-		String path = System.getProperty("user.dir")+"\\src\\test\\resources\\TAS-2_Employee_data.xlsx";
+		//String path = System.getProperty("user.dir")+"src\\test\\resources\\TAS-2_Employee_data.xlsx";
+		String path = Constants.EXCEL_PATH;
 	
 		try {
 			FileInputStream fis = new FileInputStream(path);
