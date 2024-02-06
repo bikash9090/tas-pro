@@ -11,16 +11,16 @@ public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Page objects----------------------------------------------*/
 	@FindBy(xpath = "//button[@class='scrollto btn btn-checkin checkin ng-star-inserted']")
-	WebElement checkInbutton;
+	private WebElement checkInbutton;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/header/div/div[3]/nav/ul/li[2]/a/i")
-	WebElement notificationIcon;
+	private WebElement notificationIcon;
 
 	@FindBy(xpath = "//i[@class='bi bi-person']")
-	WebElement profileIcon;
+	private WebElement profileIcon;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
-	WebElement onBoardingTab;
+	private WebElement onBoardingTab;
 
 	/*-------------------------------------Page initialization----------------------------------------------*/
 	public DashboardPage(WebDriver driver) {
