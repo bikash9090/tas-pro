@@ -20,7 +20,8 @@ public class OnBoardingPage extends PageBase {
 	/*------------------------------------------------Page objects----------------------------------------------*/
 	
 	
-	@FindBy(xpath = "//i[@class='bi bi-plus']")
+
+	@FindBy(xpath = "/html/body/app-root/app-onboarding-list/div/div[2]/div/div/div/a[1]")
 	WebElement addCandiateButton;
 
 	@FindBy(xpath = "//input[@class='form-control ng-pristine ng-invalid has-error ng-touched']")
@@ -58,24 +59,44 @@ public class OnBoardingPage extends PageBase {
 
 	/*---------------------------------------Custom actions---------------------------------------------------*/
 	public void clickAddCandiateButton() {
+	
+		waitForElemetTBeClickable(addCandiateButton);
 		scrollAndClick(addCandiateButton);
 	}
 	public void enterCandidateName(String name) {
 		scrollAndEnterText(inputName, name);
 	}
-public void enterEmail(String email ) {
+public void enterCandidateEmail(String email ) {
 	scrollAndEnterText(inpuEmail, email);
 }
-public void enterPhNo(String num) {
+public void enterCandidatePhNo(String num) {
 	scrollAndEnterText(inputNumber, num);
 }
-public void enterRole(String role) {
+public void enterCandidateRole(String role) {
 	scrollAndEnterText(inputRole, role);
 }
-public void selectYearOfexp(String NoYR) {
+public void selectCandidateYearOfexp(String NoYR) {
 	Select drop = new Select(yearDropDown);
 	drop.selectByValue(NoYR);
 }
+public void selectCandidateMonthOfexp(String NoMN) {
+	Select drop = new Select(monthDropDown);
+	drop.selectByValue(NoMN);
+}
+public void selectedExpectedCTC(CharSequence[] expctc) {
+	expectedCTCInput.sendKeys(expctc);
+}
+public void selectedcurrentCTC(CharSequence currctc) {
+	currentCTCInput.sendKeys(currctc);
+}
+public void noticePeriodBox() {
+	OnnoticePeriodBox.click();
+}
+public void 	selectNoticePeriod(String npdays) {
+	Select drop = new Select(selectNoticePeriod);
+	drop.selectByValue(npdays);
+}
+
 
 
 
