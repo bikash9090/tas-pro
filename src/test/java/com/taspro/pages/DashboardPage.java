@@ -9,8 +9,7 @@ import com.taspro.base.PageBase;
 
 public class DashboardPage extends PageBase {
 
-	/*-----------------------------Page objects----------------------------------------------*/
-
+	/*----------------------------------------Page objects----------------------------------------------*/
 	@FindBy(xpath = "//button[@class='scrollto btn btn-checkin checkin ng-star-inserted']")
 	private WebElement checkInbutton;
 
@@ -20,27 +19,27 @@ public class DashboardPage extends PageBase {
 	@FindBy(xpath = "//i[@class='bi bi-person']")
 	private WebElement profileIcon;
 
-	@FindBy(css = ".link-dark.nav-link.active")
+	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
 	private WebElement onBoardingTab;
 
-	/*----------------------Page Objects initialization-------------------------------------*/
+	/*-------------------------------------Page initialization----------------------------------------------*/
 	public DashboardPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
 	}
 
-	/*-----------------------------Custom actions--------------------------------------------*/
+	/*----------------------------------------Custom actions---------------------------------------------------*/
 
-	public void notificationbutton() {
+	public void clickOnoNtificationbutton() {
 		scrollAndClick(notificationIcon);
 	}
 
-	public void profileIconIcon() {
+	public void clickOnProfileIconIcon() {
 		scrollAndClick(profileIcon);
 	}
 
 	public void clickOnOnboardingTab() {
+		waitForElementToBeVisible(onBoardingTab);
 		scrollAndClick(onBoardingTab);
 	}
 

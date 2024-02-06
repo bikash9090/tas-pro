@@ -9,24 +9,23 @@ import com.taspro.pages.LoginPage;
 
 public class LoginPageTest extends TestBase {
 	LoginPage lpagloginpageObj;
-
-	/*-----------------------------------------BeforClass initialization-------------------------------------*/
+	
+	
+	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
 		launchWebSite();
 		lpagloginpageObj = new LoginPage(driver);
-		
 	}
-
-	/*----------------------------------Closing the browser after all the tests-------------------------------*/
+	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
 	@AfterClass
 	public void close() {
 		tearDown();
 	}
-
-	/*-------------------------------------------------TESTCASES----------------------------------------------*/
+	/*------------------------------------------------TESTCASES----------------------------------------------*/
 	@Test
 	public void loginFunTest() {
+
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 	}
 
@@ -34,4 +33,5 @@ public class LoginPageTest extends TestBase {
 	public void validateforgotpasswordlink() {
 		lpagloginpageObj.clickOnForgotPassword();
 	}
+	
 }

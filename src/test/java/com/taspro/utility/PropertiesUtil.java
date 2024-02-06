@@ -15,7 +15,8 @@ public class PropertiesUtil {
 		String path = Constants.PROPERTIES_FILE_PATH;
 		FileInputStream filepa;
 		pro = new Properties();
-		
+		FileInputStream filepa;
+    
 		try {
 			filepa = new FileInputStream(path);
 			pro.load(filepa);

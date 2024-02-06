@@ -8,17 +8,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
-	
+
 	private WebDriver driver;
 	WebDriverWait wait;
-	
 
-	/*----------------------------------PageBase initialization---------------------------------------*/
+	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public PageBase(WebDriver driver) {
-		this.driver=driver;
-		
+		this.driver = driver;
+		initWait();
 	}
-	/*--------------------------Common Actions performed on the webPage--------------------------------*/
+
+	/*----------------------------------------------------------------------------------------------------------------------------------*/
 	protected void scrollAndEnterText(WebElement element, String text) {
 		element.sendKeys(text);
 	}
@@ -26,15 +26,22 @@ public class PageBase {
 	protected void scrollAndClick(WebElement element) {
 		element.click();
 	}
-	protected void justWait() {
-		 wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		}
-	
+
+	protected void initWait() {
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	}
+
 	protected void waitForElementToBeVisible(WebElement element) {
-		   wait.until(ExpectedConditions.visibilityOf(element));
-      
+		wait.until(ExpectedConditions.visibilityOf(element));
+
+	}
+
+	public void waitForElemetTBeClickable(WebElement element) {
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+
+	public void waitForElementTobeInvisible(WebElement element) {
+		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+
 }
-	
-	
-}
-	

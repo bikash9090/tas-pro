@@ -1,5 +1,6 @@
 package com.taspro.testcases;
 
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,6 +14,7 @@ public class OnBoardingPageTest extends TestBase {
 	LoginPage lpagloginpageObj;
 	DashboardPage DashboardPageobj;
 
+	String name= "Dipak";
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
@@ -33,8 +35,24 @@ public class OnBoardingPageTest extends TestBase {
 	public void toVerifyTheOnboardingformOpening() {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		DashboardPageobj.clickOnOnboardingTab();
-		 OnBoardingPageobj.clickAddCandiateButton();
+		OnBoardingPageobj.clickAddCandiateButton();
 
+	}
+	@Test
+	public void toVerifyEmteringCandidateDetails(String name,String email, String phno, String role, String yrofexp, String mnofexp, CharSequence currCTC, CharSequence[] expCTC, String npdays) {
+		
+
+		OnBoardingPageobj.enterCandidateName(name);
+		OnBoardingPageobj.enterCandidateEmail(email);
+		OnBoardingPageobj.enterCandidatePhNo(phno);
+		OnBoardingPageobj.enterCandidateRole(role);
+		OnBoardingPageobj.selectCandidateYearOfexp(yrofexp);
+		OnBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
+		OnBoardingPageobj.selectedcurrentCTC(currCTC);
+		OnBoardingPageobj.selectedExpectedCTC(expCTC);
+		OnBoardingPageobj.selectNoticePeriod(npdays);
+		
+		
 	}
 
 }
