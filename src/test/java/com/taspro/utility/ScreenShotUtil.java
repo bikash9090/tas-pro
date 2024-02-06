@@ -23,11 +23,16 @@ public class ScreenShotUtil {
 		this.driver = driver;
 	}
 	
-	public void takeScreenShot() throws IOException {
+	public void takeScreenShot()  {
 		File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\src\\test\\java\\com\\taspro\\utility\\ScreenshotUtil\\screenshot.png"));
 		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\Screenshots\\"+timeStamp+"screenshot.png"));
-		FileUtils.copyFile(f, new File(Constants.SCREENSHOT_DIR+timeStamp+"screenshot.png"));
+		try {
+			FileUtils.copyFile(f, new File(Constants.SCREENSHOT_DIR+timeStamp+"screenshot.png"));
+		} catch (IOException e) {
+			System.out.println("File IO exception occured! during copying the screenshot to path : "+Constants.SCREENSHOT_DIR);
+			e.printStackTrace();
+		}
 
 	}
 
