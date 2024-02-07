@@ -1,7 +1,7 @@
 package com.taspro.testcases;
 
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,34 +12,34 @@ import com.taspro.pages.OnBoardingPage;
 import com.taspro.utility.ExcelUtil;
 
 public class OnBoardingPageTest extends TestBase {
-	OnBoardingPage OnBoardingPageobj;
+	OnBoardingPage onBoardingPageobj;
 	LoginPage lpagloginpageObj;
-	DashboardPage DashboardPageobj;
+	DashboardPage dashboardPageobj;
 	ExcelUtil excelObj;
 
 	String name = "Dipak";
 
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
-	@BeforeClass
+	@BeforeMethod
 	public void initilization() {
 		launchWebSite();
-		OnBoardingPageobj = new OnBoardingPage(driver);
+		onBoardingPageobj = new OnBoardingPage(driver);
 		lpagloginpageObj = new LoginPage(driver);
-		DashboardPageobj = new DashboardPage(driver);
+		dashboardPageobj = new DashboardPage(driver);
 	}
 
 	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
-//	@AfterClass
-//	public void close() {
-//		tearDown();
-//	}
+	// @AfterMethod
+	// public void close() {
+	// tearDown();
+	// }
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
 	@Test
 	public void toVerifyTheOnboardingformOpening() {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		DashboardPageobj.clickOnOnboardingTab();
-		OnBoardingPageobj.clickAddCandiateButton();
+		dashboardPageobj.clickOnOnboardingTab();
+		onBoardingPageobj.clickAddCandiateButton();
 
 	}
 
@@ -49,26 +49,24 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcel("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "toVerifyTheOnboardingformOpening")
+	@Test(dataProvider = "empOnBrdData")
 	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		OnBoardingPageobj.enterCandidateName(name);
-		OnBoardingPageobj.enterCandidateEmail(email);
-		OnBoardingPageobj.enterCandidatePhNo(phno);
-		OnBoardingPageobj.enterCandidateRole(role);
-		OnBoardingPageobj.selectCandidateYearOfexp(yrofexp);
-		OnBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
-		OnBoardingPageobj.selectedcurrentCTC(currCTC);
-		OnBoardingPageobj.selectedExpectedCTC(expCTC);
-		OnBoardingPageobj.selectNoticePeriod(npdays);
+		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
+		dashboardPageobj.clickOnOnboardingTab();
+		onBoardingPageobj.clickAddCandiateButton();
+		onBoardingPageobj.waitForPageLoad(2000);
+
+		onBoardingPageobj.enterCandidateName(name);
+		onBoardingPageobj.enterCandidateEmail(email);
+		onBoardingPageobj.enterCandidatePhNo(phno);
+		onBoardingPageobj.enterCandidateRole(role);
+		onBoardingPageobj.selectCandidateYearOfexp(yrofexp);
+		onBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
+		onBoardingPageobj.selectedcurrentCTC(currCTC);
+		onBoardingPageobj.selectedExpectedCTC(expCTC);
+		onBoardingPageobj.selectNoticePeriod(npdays);
 
 	}
 
