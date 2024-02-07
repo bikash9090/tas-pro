@@ -2,19 +2,23 @@ package com.taspro.testcases;
 
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import com.taspro.base.TestBase;
 import com.taspro.pages.DashboardPage;
 import com.taspro.pages.LoginPage;
 import com.taspro.pages.OnBoardingPage;
+import com.taspro.utility.ExcelUtil;
 
 public class OnBoardingPageTest extends TestBase {
 	OnBoardingPage OnBoardingPageobj;
 	LoginPage lpagloginpageObj;
 	DashboardPage DashboardPageobj;
+	ExcelUtil excelObj;
 
-	String name= "Dipak";
+	String name = "Dipak";
+
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
@@ -38,9 +42,23 @@ public class OnBoardingPageTest extends TestBase {
 		OnBoardingPageobj.clickAddCandiateButton();
 
 	}
-	@Test
-	public void toVerifyEmteringCandidateDetails(String name,String email, String phno, String role, String yrofexp, String mnofexp, CharSequence currCTC, CharSequence[] expCTC, String npdays) {
+
+	@DataProvider(name = "empOnBrdData")
+	public String[][] onBoardData() {
+		excelObj = new ExcelUtil();
+		return excelObj.readExcel("OnBoardData");
+	}
+
+	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "toVerifyTheOnboardingformOpening")
+	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
+			String mnofexp, String currCTC, String expCTC, String npdays) {
 		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		OnBoardingPageobj.enterCandidateName(name);
 		OnBoardingPageobj.enterCandidateEmail(email);
@@ -51,8 +69,7 @@ public class OnBoardingPageTest extends TestBase {
 		OnBoardingPageobj.selectedcurrentCTC(currCTC);
 		OnBoardingPageobj.selectedExpectedCTC(expCTC);
 		OnBoardingPageobj.selectNoticePeriod(npdays);
-		
-		
+
 	}
 
 }
