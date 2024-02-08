@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -12,6 +14,10 @@ import com.taspro.base.Constants;
 public class ExcelUtil {
 
 	XSSFWorkbook workbook;
+
+	
+	
+	
 
 	public String[][] readExcel(String sheetName) {
 		
@@ -38,7 +44,9 @@ public class ExcelUtil {
 
 		for (int i = 0; i < lastRow; i++) {
 			for (int j = 0; j < lastCell; j++) {
-				empDetail[i][j] = sheet.getRow(i + 1).getCell(j).toString(); //Retrieving and storing the data from excel sheet by skipping the first row.
+				XSSFCell cellData= sheet.getRow(i+1).getCell(j);//Retrieving and storing the data from excel sheet by skipping the first row.
+				cellData.setCellType(CellType.STRING);
+				empDetail[i][j] = cellData.toString();
 			}
 		}
 		return empDetail;
