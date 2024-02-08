@@ -1,15 +1,15 @@
 package com.taspro.base;
 
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
@@ -17,58 +17,78 @@ public class PageBase {
 	public WebDriver driver;
 	WebDriverWait wait;
 	JavascriptExecutor jsExecutor;
+	Actions actions;
+	Robot robot;
 
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public PageBase(WebDriver driver) {
 		this.driver = driver;
 		jsExecutor = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT));
+		actions = new Actions(driver);
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------*/
-	
+
 	protected void refreshDom() {
 		jsExecutor.executeScript("location.reload()");
 	}
-	
-	protected  void scrollToView(WebElement element) {
-		 jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});", element);
-	}
-	
-	protected void scrollAndEnterText(WebElement element, String text) {
-		scrollToView(element);
-		flash(element);
-		element.sendKeys(text);
-	}
-	
-	protected void clickByJavaScript(WebElement element) {
-		flash(element);
-		jsExecutor.executeScript("arguments[0].click();", element);
+
+	protected void scrollIntoView(WebElement element) {
+		jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",
+				element);
 	}
 
-	protected void scrollAndClick(WebElement element) {
-		scrollToView(element);
-		flash(element);
-		waitForElemetTBeClickable(element);
-		element.click();
-	}
-
-	public void flash(WebElement element) {
+	protected void flash(WebElement element) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver; // downcasting
 		js.executeScript("arguments[0].setAttribute('style','background: yellow; border: solid 5px red')", element);
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white')", element);
 
 	}
 
+	protected void scrollAndEnterText(WebElement element, String text) {
+		scrollIntoView(element);
+		flash(element);
+		element.sendKeys(text);
+	}
+
+	/*-----------------------------CLICK ACTIONS--------------------------------*/
+
+	protected void clickOnScreen() {
+		actions = new Actions(driver);
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			System.out.println("AWTException occured! during mouse click action on current page.");
+			e.printStackTrace();
+		}
+		robot.mouseMove(50, 50);
+		actions.click().build().perform();
+	}
+
+	protected void clickByJavaScript(WebElement element) {
+		scrollIntoView(element);
+		flash(element);
+		jsExecutor.executeScript("arguments[0].click();", element);
+	}
+
+	protected void scrollAndClick(WebElement element) {
+		scrollIntoView(element);
+		flash(element);
+		waitForElemetTBeClickable(element);
+		element.click();
+	}
+
+	// ---------------Select option from any list------------------------
 	protected void selectFromList(List<WebElement> element, String option) {
 		for (WebElement opts : element) {
 			if (opts.getText().toLowerCase().equalsIgnoreCase(option)) {
@@ -79,9 +99,8 @@ public class PageBase {
 		}
 	}
 
-	/*-------------------------------------------waits methods-------------------------------------*/
+	/*-------------------------------------------WAITS METHODS---------------------------------------*/
 
-	// it waits for the page load to complete.
 	public void waitForPageLoad(int timeOutInMilis) {
 
 		long endTime = System.currentTimeMillis() + timeOutInMilis;
@@ -94,10 +113,6 @@ public class PageBase {
 				break;
 			}
 		}
-	}
-	
-	protected void initWait() {
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}
 
 	protected void waitForElementToBeVisible(WebElement element) {

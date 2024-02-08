@@ -36,7 +36,7 @@ public class OnBoardingPageTest extends TestBase {
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
 	@Test
-	public void toVerifyTheOnboardingformOpening() {
+	public void userAccountLoginTest() {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
 		onBoardingPageobj.clickAddCandiateButton();
@@ -57,7 +57,6 @@ public class OnBoardingPageTest extends TestBase {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
 		onBoardingPageobj.clickAddCandiateButton();
-		onBoardingPageobj.waitForPageLoad(2000);
 
 		onBoardingPageobj.enterCandidateName(name);
 		onBoardingPageobj.enterCandidateEmail(email);
@@ -66,11 +65,9 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.selectCandidateYearOfexp(yrofexp);
 		onBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
 		onBoardingPageobj.selectedcurrentCTC(currCTC);
-		onBoardingPageobj.selectedExpectedCTC(expCTC);
+		onBoardingPageobj.selecteExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
 		onBoardingPageobj.clickSaveButton();
-		onBoardingPageobj.clickAddCandiateButton();
-		onBoardingPageobj.waitForPageLoad(2000);
 
 	}
 
