@@ -1,7 +1,6 @@
 package com.taspro.testcases;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -20,7 +19,7 @@ public class OnBoardingPageTest extends TestBase {
 	String name = "Dipak";
 
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
-	@BeforeMethod
+	@BeforeClass
 	public void initilization() {
 		launchWebSite();
 		onBoardingPageobj = new OnBoardingPage(driver);
@@ -40,6 +39,8 @@ public class OnBoardingPageTest extends TestBase {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
 		onBoardingPageobj.clickAddCandiateButton();
+		onBoardingPageobj.waitForPageLoad(2000);
+
 
 	}
 
@@ -49,15 +50,10 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcel("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData")
+	@Test(dataProvider = "empOnBrdData",dependsOnMethods = "toVerifyTheOnboardingformOpening")
 	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
-
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		dashboardPageobj.clickOnOnboardingTab();
-		onBoardingPageobj.clickAddCandiateButton();
-		onBoardingPageobj.waitForPageLoad(2000);
-
+		
 		onBoardingPageobj.enterCandidateName(name);
 		onBoardingPageobj.enterCandidateEmail(email);
 		onBoardingPageobj.enterCandidatePhNo(phno);
@@ -67,6 +63,9 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.selectedcurrentCTC(currCTC);
 		onBoardingPageobj.selectedExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
+		onBoardingPageobj.clickSaveButton();
+		onBoardingPageobj.clickAddCandiateButton();
+		onBoardingPageobj.waitForPageLoad(2000);
 
 	}
 

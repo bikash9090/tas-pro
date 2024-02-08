@@ -13,23 +13,30 @@ public class PageBase {
 
 	public WebDriver driver;
 	WebDriverWait wait;
-	JavascriptExecutor jsxObj;
+	JavascriptExecutor jsExecutor;
 
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 	public PageBase(WebDriver driver) {
 		this.driver = driver;
-		jsxObj = (JavascriptExecutor) driver;
+		jsExecutor = (JavascriptExecutor) driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.EXPLICIT_WAIT));
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------*/
+	protected  void scrollToView(WebElement element) {
+		 jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});", element);
+	}
+	
 	protected void scrollAndEnterText(WebElement element, String text) {
+		scrollToView(element);
 		flash(element);
 		element.sendKeys(text);
 	}
 
 	protected void scrollAndClick(WebElement element) {
+		scrollToView(element);
 		flash(element);
+		waitForElemetTBeClickable(element);
 		element.click();
 	}
 
@@ -37,12 +44,14 @@ public class PageBase {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver; // downcasting
 		js.executeScript("arguments[0].setAttribute('style','background: yellow; border: solid 5px red')", element);
+		
 		try {
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white')", element);
 
 	}
@@ -66,7 +75,7 @@ public class PageBase {
 
 		while (System.currentTimeMillis() < endTime) {
 
-			String pageState = jsxObj.executeScript("return document.readyState").toString();
+			String pageState = jsExecutor.executeScript("return document.readyState").toString();
 			if (pageState.equals("complete")) {
 				System.out.println("page DOM is fully loaded now.....");
 				break;

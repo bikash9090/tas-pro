@@ -49,14 +49,14 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(xpath = "//input[@formcontrolname='expected_ctc']")
 	private WebElement expectedCTCInput;
 
-	@FindBy(id = "mat-select-value-13")
-	private WebElement OnnoticePeriodBox;
+	@FindBy(xpath = "//div[@id='mat-select-value-7']")
+	private WebElement noticePeriodField;
 
-	@FindBy(xpath = "//mat-option[@class=\"mat-option mat-focus-indicator ng-tns-c129-15\"]")
-	private List<WebElement> selectNoticePeriod;
+	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
+	private List<WebElement> noticePeriosList;
 
-	@FindBy(xpath = "/html/body/div[2]/div[2]/div/mat-dialog-container/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
-	private WebElement submitOnBoardingForm;
+	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
+	private WebElement saveButton;
 
 	/*------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
@@ -88,26 +88,31 @@ public class OnBoardingPage extends PageBase {
 	}
 
 	public void selectCandidateYearOfexp(String year) {
-		candidateExpInYear.click();
+		scrollAndClick(candidateExpInYear);
 		selectFromList(experianceListInYear, year);
 	}
 
 	public void selectCandidateMonthOfexp(String month) {
-		candidateExpInMonth.click();
+		scrollAndClick(candidateExpInMonth);
 		selectFromList(experianceListInMonth, month);
 	}
 
 	public void selectedExpectedCTC(String expctc) {
-		expectedCTCInput.sendKeys(expctc);
+		scrollAndEnterText(expectedCTCInput, expctc);
 	}
 
 	public void selectedcurrentCTC(String currctc) {
-		currentCTCInput.sendKeys(currctc);
+		scrollAndEnterText(currentCTCInput, currctc);
 	}
 
 	public void selectNoticePeriod(String noticePeriod) {
-		selectFromList(selectNoticePeriod, noticePeriod);
+		scrollAndClick(noticePeriodField);
+		selectFromList(noticePeriosList, noticePeriod);
 
+	}
+
+	public void clickSaveButton() {
+		scrollAndClick(saveButton);
 	}
 
 }
