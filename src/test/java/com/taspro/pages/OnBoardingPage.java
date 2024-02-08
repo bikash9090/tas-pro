@@ -1,10 +1,11 @@
 package com.taspro.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
 import com.taspro.base.PageBase;
 
@@ -15,23 +16,32 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(xpath = "/html/body/app-root/app-onboarding-list/div/div[2]/div/div/div/a[1]")
 	private WebElement addCandiateButton;
 
+	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div")
+	private WebElement addCandidateForm;
+
 	@FindBy(xpath = "//input[@class='form-control ng-pristine ng-invalid has-error ng-touched']")
-	private WebElement inputName;
+	private WebElement candidateNameField;
 
 	@FindBy(xpath = "//input[@type='email']")
-	private WebElement inpuEmail;
+	private WebElement candidateEmailField;
 
 	@FindBy(xpath = "//input[@placeholder='081234 56789']")
-	private WebElement inputNumber;
+	private WebElement candidateMobNoField;
 
 	@FindBy(xpath = "//input[@formcontrolname='role']")
-	private WebElement inputRole;
+	private WebElement candidateRoleField;
 
-	@FindBy(id = " mat-select-value-3")
-	private WebElement yearDropDown;
+	@FindBy(xpath = "//div[@class=\"mat-select-value ng-tns-c129-9\"]")
+	private WebElement candidateExpInYear;
 
-	@FindBy(id = "mat-select-value-5")
-	private WebElement monthDropDown;
+	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
+	private List<WebElement> experianceListInYear;
+
+	@FindBy(xpath = "//div[@id='mat-select-value-5']")
+	private WebElement candidateExpInMonth;
+
+	@FindBy(xpath = "//span[@class='mat-option-text']")
+	private List<WebElement> experianceListInMonth;
 
 	@FindBy(xpath = "//input[@formcontrolname='curr_ctc']")
 	private WebElement currentCTCInput;
@@ -39,14 +49,14 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(xpath = "//input[@formcontrolname='expected_ctc']")
 	private WebElement expectedCTCInput;
 
-	@FindBy(xpath = "//span[@class='mat-checkbox-inner-container mat-checkbox-inner-container-no-side-margin']")
-	private WebElement OnnoticePeriodBox;
+	@FindBy(xpath = "//div[@id='mat-select-value-7']")
+	private WebElement noticePeriodField;
 
-	@FindBy(id = "mat-select-value-13")
-	private WebElement selectNoticePeriod;
+	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
+	private List<WebElement> noticePeriosList;
 
-	@FindBy(xpath = "/html/body/div[2]/div[2]/div/mat-dialog-container/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
-	private WebElement submitOnBoardingForm;
+	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
+	private WebElement saveButton;
 
 	/*------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
@@ -56,52 +66,53 @@ public class OnBoardingPage extends PageBase {
 
 	/*---------------------------------------Custom actions---------------------------------------------------*/
 	public void clickAddCandiateButton() {
-
-		waitForElemetTBeClickable(addCandiateButton);
+		waitForElementToBeVisible(addCandiateButton);
 		scrollAndClick(addCandiateButton);
 	}
 
 	public void enterCandidateName(String name) {
-		scrollAndEnterText(inputName, name);
+		waitForElementToBeVisible(candidateNameField);
+		scrollAndEnterText(candidateNameField, name);
 	}
 
 	public void enterCandidateEmail(String email) {
-		scrollAndEnterText(inpuEmail, email);
+		scrollAndEnterText(candidateEmailField, email);
 	}
 
 	public void enterCandidatePhNo(String num) {
-		scrollAndEnterText(inputNumber, num);
+		scrollAndEnterText(candidateMobNoField, num);
 	}
 
 	public void enterCandidateRole(String role) {
-		scrollAndEnterText(inputRole, role);
+		scrollAndEnterText(candidateRoleField, role);
 	}
 
-	public void selectCandidateYearOfexp(String NoYR) {
-		Select drop = new Select(yearDropDown);
-		drop.selectByValue(NoYR);
+	public void selectCandidateYearOfexp(String year) {
+		scrollAndClick(candidateExpInYear);
+		selectFromList(experianceListInYear, year);
 	}
 
-	public void selectCandidateMonthOfexp(String NoMN) {
-		Select drop = new Select(monthDropDown);
-		drop.selectByValue(NoMN);
+	public void selectCandidateMonthOfexp(String month) {
+		scrollAndClick(candidateExpInMonth);
+		selectFromList(experianceListInMonth, month);
 	}
 
-	public void selectedExpectedCTC(CharSequence[] expctc) {
-		expectedCTCInput.sendKeys(expctc);
+	public void selectedExpectedCTC(String expctc) {
+		scrollAndEnterText(expectedCTCInput, expctc);
 	}
 
-	public void selectedcurrentCTC(CharSequence currctc) {
-		currentCTCInput.sendKeys(currctc);
+	public void selectedcurrentCTC(String currctc) {
+		scrollAndEnterText(currentCTCInput, currctc);
 	}
 
-	public void noticePeriodBox() {
-		OnnoticePeriodBox.click();
+	public void selectNoticePeriod(String noticePeriod) {
+		scrollAndClick(noticePeriodField);
+		selectFromList(noticePeriosList, noticePeriod);
+
 	}
 
-	public void selectNoticePeriod(String npdays) {
-		Select drop = new Select(selectNoticePeriod);
-		drop.selectByValue(npdays);
+	public void clickSaveButton() {
+		scrollAndClick(saveButton);
 	}
 
 }

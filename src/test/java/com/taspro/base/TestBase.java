@@ -1,5 +1,7 @@
 package com.taspro.base;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -44,6 +46,7 @@ public class TestBase {
 			options.addPreference("geo.provider.testing.allow", true);
 
 			driver = new FirefoxDriver(options);
+			//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Constants.IMPLICIT_WAIT));
 
 		} else if (browser.equalsIgnoreCase("edge")) {
 			WebDriverManager.edgedriver().setup();
