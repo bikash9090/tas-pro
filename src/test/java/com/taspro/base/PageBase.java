@@ -4,9 +4,12 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageBase {
@@ -23,6 +26,11 @@ public class PageBase {
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------*/
+	
+	protected void refreshDom() {
+		jsExecutor.executeScript("location.reload()");
+	}
+	
 	protected  void scrollToView(WebElement element) {
 		 jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});", element);
 	}
@@ -31,6 +39,11 @@ public class PageBase {
 		scrollToView(element);
 		flash(element);
 		element.sendKeys(text);
+	}
+	
+	protected void clickByJavaScript(WebElement element) {
+		flash(element);
+		jsExecutor.executeScript("arguments[0].click();", element);
 	}
 
 	protected void scrollAndClick(WebElement element) {
@@ -82,7 +95,7 @@ public class PageBase {
 			}
 		}
 	}
-
+	
 	protected void initWait() {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 	}

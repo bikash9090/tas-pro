@@ -15,8 +15,8 @@ public class OnBoardingPage extends PageBase {
 
 	@FindBy(xpath = "/html/body/app-root/app-onboarding-list/div/div[2]/div/div/div/a[1]")
 	private WebElement addCandiateButton;
-
-	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div")
+	
+	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]")
 	private WebElement addCandidateForm;
 
 	@FindBy(xpath = "//input[@class='form-control ng-pristine ng-invalid has-error ng-touched']")
@@ -66,8 +66,9 @@ public class OnBoardingPage extends PageBase {
 
 	/*---------------------------------------Custom actions---------------------------------------------------*/
 	public void clickAddCandiateButton() {
+		
 		waitForElementToBeVisible(addCandiateButton);
-		scrollAndClick(addCandiateButton);
+		clickByJavaScript(addCandiateButton);
 	}
 
 	public void enterCandidateName(String name) {
