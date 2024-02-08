@@ -31,7 +31,7 @@ public class OnBoardingPageTest extends TestBase {
 	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
 	@AfterMethod
 	public void close() {
-	tearDown();
+		tearDown();
 	}
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
@@ -42,7 +42,6 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.clickAddCandiateButton();
 		onBoardingPageobj.waitForPageLoad(2000);
 
-
 	}
 
 	@DataProvider(name = "empOnBrdData")
@@ -51,10 +50,15 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcel("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData",dependsOnMethods = "toVerifyTheOnboardingformOpening")
+	@Test(dataProvider = "empOnBrdData")
 	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
-		
+
+		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
+		dashboardPageobj.clickOnOnboardingTab();
+		onBoardingPageobj.clickAddCandiateButton();
+		onBoardingPageobj.waitForPageLoad(2000);
+
 		onBoardingPageobj.enterCandidateName(name);
 		onBoardingPageobj.enterCandidateEmail(email);
 		onBoardingPageobj.enterCandidatePhNo(phno);
