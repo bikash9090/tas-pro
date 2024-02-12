@@ -1,6 +1,8 @@
 package com.taspro.testcases;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -20,7 +22,7 @@ public class OnBoardingPageTest extends TestBase {
 	String name = "Dipak";
 
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
-	@BeforeMethod
+	@BeforeClass
 	public void initilization() {
 		launchWebSite();
 		onBoardingPageobj = new OnBoardingPage(driver);
@@ -29,9 +31,9 @@ public class OnBoardingPageTest extends TestBase {
 	}
 
 	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
-	@AfterMethod
+	@AfterClass
 	public void close() {
-		tearDown();
+		//tearDown();
 	}
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
@@ -50,13 +52,9 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcel("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData")
+	@Test(dataProvider = "empOnBrdData",dependsOnMethods = "userAccountLoginTest")
 	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
-
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		dashboardPageobj.clickOnOnboardingTab();
-		onBoardingPageobj.clickAddCandiateButton();
 
 		onBoardingPageobj.enterCandidateName(name);
 		onBoardingPageobj.enterCandidateEmail(email);
@@ -68,6 +66,8 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.selecteExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
 		onBoardingPageobj.clickSaveButton();
+		onBoardingPageobj.refreshDom();
+		onBoardingPageobj.clickAddCandiateButton();
 
 	}
 

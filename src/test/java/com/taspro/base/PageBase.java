@@ -30,7 +30,7 @@ public class PageBase {
 
 	/*----------------------------------------------------------------------------------------------------------------------------------*/
 
-	protected void refreshDom() {
+	public void refreshDom() {
 		jsExecutor.executeScript("location.reload()");
 	}
 

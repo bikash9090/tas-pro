@@ -31,13 +31,13 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(xpath = "//input[@formcontrolname='role']")
 	private WebElement candidateRoleField;
 
-	@FindBy(xpath = "//div[@class=\"mat-select-value ng-tns-c129-9\"]")
+	@FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/child::div[1]/descendant::div[2]")
 	private WebElement candidateExpInYear;
 
 	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
 	private List<WebElement> experianceListInYear;
 
-	@FindBy(xpath = "//div[@id='mat-select-value-5']")
+	@FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/following::div[1]/child::div/descendant::div[3]")
 	private WebElement candidateExpInMonth;
 
 	@FindBy(xpath = "//span[@class='mat-option-text']")
