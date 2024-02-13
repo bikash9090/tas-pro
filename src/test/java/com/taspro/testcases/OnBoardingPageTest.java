@@ -68,7 +68,7 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.refreshDom();
 		onBoardingPageobj.clickAddCandiateButton();
 		
-		Assert.assertEquals(message, "Candidate Added Successfully", "Data already exists in the system : ");
+		Assert.assertEquals(message, "Candidate Added Successfully", "Data not saved... ");
 
 	}
 
