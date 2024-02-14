@@ -40,7 +40,7 @@ public class LoginPageTest extends TestBase {
 	}
 
 	@Test
-	public void userCredentialLogin() {
+	public void userLoginTest() {
 		lpagloginpageObj.enterEmail("an2119@checkboxtechnology.com");
 		lpagloginpageObj.enterPassword("Aniket@123");
 		lpagloginpageObj.clickOnLoginButton();
