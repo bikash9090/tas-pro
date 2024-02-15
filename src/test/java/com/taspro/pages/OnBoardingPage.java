@@ -57,6 +57,12 @@ public class OnBoardingPage extends PageBase {
 
 	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
 	private WebElement saveButton;
+	
+	@FindBy(xpath="//tbody/tr[1]/td[11]/a[3]/mat-icon[1]")
+	private WebElement deactivatebutton;
+	
+	@FindBy(xpath="//button[normalize-space()='Ok']")
+	private WebElement deactivateOK;
 
 	/*------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
@@ -116,6 +122,15 @@ public class OnBoardingPage extends PageBase {
 
 	public void clickSaveButton() {
 		scrollAndClick(saveButton);
+	}
+	public void clickDeactivateButton() {
+		scrollAndClick(deactivatebutton);
+	}
+	
+	public void clickOnDeactivateOK() {
+		waitForElementToBeVisible(deactivateOK);
+		waitForElemetTBeClickable(deactivateOK);
+		scrollAndClick(deactivateOK);
 	}
 
 }
