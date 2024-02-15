@@ -70,5 +70,12 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.clickAddCandiateButton();
 
 	}
+	@Test()
+	public void toVerifyDeactivateEmployee() {
+		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
+		dashboardPageobj.clickOnOnboardingTab();
+		onBoardingPageobj.clickDeactivateButton();
+		onBoardingPageobj.clickOnDeactivateOK();
+		}
 
 }
