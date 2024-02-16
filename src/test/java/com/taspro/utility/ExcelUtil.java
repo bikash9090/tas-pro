@@ -53,8 +53,6 @@ public class ExcelUtil {
 		}
 		return empDetail;
 	}
-	
-	
 
 	public String[][] readColumnData1(String sheetName, int colNum) { // column number starts from 0.
 		try {
@@ -74,7 +72,7 @@ public class ExcelUtil {
 			cellData.setCellType(CellType.STRING);
 			empColData[i][0] = cellData.toString();
 		}
-		
+
 		return empColData;
 	}
 
@@ -96,10 +94,7 @@ public class ExcelUtil {
 			cellData.setCellType(CellType.STRING);
 			empColData[i][0] = cellData.toString();
 		}
-		
+
 		return empColData;
 	}
-
-	
-
 }

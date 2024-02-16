@@ -42,6 +42,4 @@ public class LoginPageTest extends TestBase {
 	public void validateforgotpasswordlink() {
 		lpagloginpageObj.clickOnForgotPassword();
 	}
-
-	
 }

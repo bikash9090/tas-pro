@@ -52,7 +52,7 @@ public class OnBoardingPageTest extends TestBase {
 	}
 
 	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "userAccountLoginTest")
-	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
+	public void candidateOnBoardingTest(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
 
 		onBoardingPageobj.enterCandidateName(name);

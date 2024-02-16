@@ -1,7 +1,5 @@
 package com.taspro.pages;
 
-import static org.testng.Assert.assertEquals;
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -62,16 +60,18 @@ public class OnBoardingPage extends PageBase {
 
 	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
 	private WebElement saveButton;
-	
-	@FindBy(xpath="//*[@id=\"hr-table\"]/tbody/tr/td[2]")
-	private List <WebElement> empNames;
-	
-	@FindBy(xpath="//button[normalize-space()='Ok']")
+
+	@FindBy(xpath = "//*[@id=\"hr-table\"]/tbody/tr/td[2]")
+	private List<WebElement> empNames;
+
+	@FindBy(xpath = "//button[normalize-space()='Ok']")
 	private WebElement deactivateOK;
-	
-	@FindBy(xpath="//span[@class=\"mat-simple-snack-bar-content\"]")
+
+	@FindBy(xpath = "//span[@class=\"mat-simple-snack-bar-content\"]")
 	private WebElement deletionToast;
-	
+
+	By deactivateEmpButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
+
 	@FindBy(xpath = "//a[contains(@class,'btn btn-danger border-0')]")
 	private WebElement cancelButton;
 
@@ -83,10 +83,8 @@ public class OnBoardingPage extends PageBase {
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
 	WebElement alertOkBtn;
-	
-	private By deleteButtonLocator = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
 
-	By deactivateEmpButton =By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
+	private By deleteButtonLocator = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
 
 	/*------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
@@ -160,7 +158,29 @@ public class OnBoardingPage extends PageBase {
 	public void clickOnCancelButton() {
 		scrollAndClick(cancelButton);
 	}
-	
+
+	public void clickDeactivateButton(String employename) {
+		for (WebElement name : empNames) {
+			if (name.getText().toLowerCase().equalsIgnoreCase(employename)) {
+				scrollAndClick(name.findElement(deactivateEmpButton));
+				break;
+			}
+		}
+	}
+
+	public void clickOnDeactivateOK() {
+		waitForPageLoad(3000);
+		waitForElementToBeVisible(deactivateOK);
+		waitForElemetTBeClickable(deactivateOK);
+		scrollAndClick(deactivateOK);
+	}
+
+	public void deletionToastMsg() {
+		waitForElementToBeVisible(deletionToast);
+		String tstmsg = deletionToast.getText();
+		Assert.assertEquals(tstmsg, "Candidate Deactivated Successfully");
+	}
+
 	public void clickOnDeleteButtonOfCandidate(String candidateName) {
 		for (WebElement cname : candidateNames) {
 			if (cname.getText().toLowerCase().equalsIgnoreCase(candidateName)) {
@@ -180,28 +200,6 @@ public class OnBoardingPage extends PageBase {
 		} else {
 			return false;
 		}
-	}
-	public void clickDeactivateButton(String employename) {
-		for(WebElement name:empNames) {
-			if(name.getText().toLowerCase().equalsIgnoreCase(employename)) {
-				scrollAndClick(name.findElement(deactivateEmpButton));
-				break;
-			}
-		}
-	}
-	
-	public void clickOnDeactivateOK() {
-		waitForPageLoad(3000);
-		waitForElementToBeVisible(deactivateOK);
-		waitForElemetTBeClickable(deactivateOK);
-		scrollAndClick(deactivateOK);
-	}
-	
-	public void deletionToastMsg() {
-		waitForElementToBeVisible(deletionToast);
-		String tstmsg = deletionToast.getText();
-		Assert.assertEquals(tstmsg, "Candidate Deactivated Successfully");
-		
 	}
 
 }
