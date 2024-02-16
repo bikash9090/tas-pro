@@ -12,13 +12,13 @@ import com.taspro.base.PageBase;
 public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Page objects----------------------------------------------*/
-	@FindBy(xpath = "//*[@id=\"header\"]/div/div[3]/nav/ul/li[1]")
+	@FindBy(xpath = "//button[@class='scrollto btn btn-checkin checkin ng-star-inserted']")
 	private WebElement checkInbutton;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/header/div/div[3]/nav/ul/li[2]/a/i")
 	private WebElement notificationIcon;
 
-	@FindBy(xpath = "//*[@id=\"header\"]/div/div[3]/nav/ul/li[3]/a/i")
+	@FindBy(xpath = "//i[@class='bi bi-person']")
 	private WebElement profileIcon;
 	
 	@FindBy(xpath="//span[@class=\"uxg-caption\"]")
@@ -35,6 +35,16 @@ public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Custom actions---------------------------------------------------*/
 
+	 public boolean isLoginSuccessful(String url) {
+			
+		 if(driver.getCurrentUrl().equals(url)) {
+			 return true;
+		 }else {
+			 return false;
+		}
+		
+	 }
+	
 	public void clickOnoNtificationbutton() {
 		scrollAndClick(notificationIcon);
 	}
