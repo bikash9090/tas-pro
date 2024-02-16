@@ -28,6 +28,7 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj = new OnBoardingPage(driver);
 		lpagloginpageObj = new LoginPage(driver);
 		dashboardPageobj = new DashboardPage(driver);
+		excelObj = new ExcelUtil();
 	}
 
 	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
@@ -48,7 +49,6 @@ public class OnBoardingPageTest extends TestBase {
 
 	@DataProvider(name = "empOnBrdData")
 	public String[][] onBoardData() {
-		excelObj = new ExcelUtil();
 		return excelObj.readExcel("OnBoardData");
 	}
 
@@ -70,7 +70,14 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.clickAddCandiateButton();
 
 	}
-	@Test()
+	
+	@DataProvider(name="empDelData")
+	
+	public String[][] delempData() {
+		 return excelObj.readExcel("delEmpData");	
+	}
+	
+	@Test(dataProvider ="empDelData")
 	public void toVerifyDeactivateEmployee() {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
