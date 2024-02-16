@@ -21,6 +21,17 @@ public class DashboardPage extends PageBase {
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
 	private WebElement onBoardingTab;
+	
+	
+	 public boolean isLoginSuccessful(String url) {
+			
+		 if(driver.getCurrentUrl().equals(url)) {
+			 return true;
+		 }else {
+			 return false;
+		}
+		
+	 }
 
 	/*-------------------------------------Page initialization----------------------------------------------*/
 	public DashboardPage(WebDriver driver) {
