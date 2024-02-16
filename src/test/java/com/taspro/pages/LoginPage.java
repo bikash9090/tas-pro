@@ -49,5 +49,17 @@ public class LoginPage extends PageBase {
 		scrollAndClick(forgotPassword);
 	}
 	
+	public void enterEmail(String email) {
+		scrollAndEnterText(emailfield, email);
+	}
+	
+	public void enterPassword(String password) {
+		scrollAndEnterText(passwordfield, password);
+	}
+	
+	public void clickOnLoginButton() {
+		scrollAndClick(loginButton);
+	}
+	
 	
 }
