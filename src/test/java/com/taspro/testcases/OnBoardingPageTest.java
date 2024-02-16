@@ -71,18 +71,20 @@ public class OnBoardingPageTest extends TestBase {
 
 	}
 	
-	@DataProvider(name="empDelData")
+//	@DataProvider(name="empDelData")
+//	
+//	public String[][] delempData() {
+//		 return excelObj.readExcel("delEmpData");	
+//	}
 	
-	public String[][] delempData() {
-		 return excelObj.readExcel("delEmpData");	
-	}
-	
-	@Test(dataProvider ="empDelData")
+	@Test
 	public void toVerifyDeactivateEmployee() {
+		String employeeName = "Abhi"; 
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
-		onBoardingPageobj.clickDeactivateButton();
+		onBoardingPageobj.clickDeactivateButton(employeeName);
 		onBoardingPageobj.clickOnDeactivateOK();
+		onBoardingPageobj.deletionToastMsg();
 		}
 
 }
