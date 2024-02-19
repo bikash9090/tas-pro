@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -90,13 +91,25 @@ public class PageBase {
 
 	// ---------------Select option from any list------------------------
 	protected void selectFromList(List<WebElement> element, String option) {
-		for (WebElement opts : element) {
-			if (opts.getText().toLowerCase().equalsIgnoreCase(option)) {
-				waitForElementToBeVisible(opts);
-				opts.click();
+		Boolean optionFound = false;
+		for (WebElement opt : element) {
+			if (opt.getText().toLowerCase().equalsIgnoreCase(option)) {
+				waitForElementToBeVisible(opt);
+				opt.click();
+				optionFound = true;
 				break;
 			}
 		}
+		if(!optionFound) {
+			System.out.println("The option '"+option+"' not found! in the list ");
+			actions.sendKeys(Keys.ESCAPE).build().perform();
+		}
+		
+	}
+
+	// ---------------Switch to alert------------------------
+	protected String getTextFromAlert() {
+		return driver.switchTo().alert().getText();
 	}
 
 	/*-------------------------------------------WAITS METHODS---------------------------------------*/
