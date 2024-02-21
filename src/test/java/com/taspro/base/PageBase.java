@@ -46,18 +46,28 @@ public class PageBase {
 		js.executeScript("arguments[0].setAttribute('style','background: yellow; border: solid 5px red')", element);
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Interruputed exception occured! during flash operation.");
 			e.printStackTrace();
 		}
 
 		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white')", element);
 
 	}
+	
+	protected Boolean isEnabled(WebElement element) {
+		return element.isEnabled();
+	}
 
-	protected void scrollAndEnterText(WebElement element, String text) {
+	/*-----------------------------ENTER TEXT ACTIONS--------------------------------*/
+	protected void scrollAndEnterTextTo(WebElement element, String text) {
 		scrollIntoView(element);
+		flash(element);
+		element.sendKeys(text);
+	}
+
+	protected void flashAndEnterTextTo(WebElement element, String text) {
 		flash(element);
 		element.sendKeys(text);
 	}
@@ -89,6 +99,11 @@ public class PageBase {
 		element.click();
 	}
 
+	protected void flashAndClick(WebElement element) {
+		flash(element);
+		element.click();
+	}
+
 	// ---------------Select option from any list------------------------
 	protected void selectFromList(List<WebElement> element, String option) {
 		Boolean optionFound = false;
@@ -100,11 +115,11 @@ public class PageBase {
 				break;
 			}
 		}
-		if(!optionFound) {
-			System.out.println("The option '"+option+"' not found! in the list ");
+		if (!optionFound) {
+			System.out.println("The option '" + option + "' not found! in the list ");
 			actions.sendKeys(Keys.ESCAPE).build().perform();
 		}
-		
+
 	}
 
 	// ---------------Switch to alert------------------------
