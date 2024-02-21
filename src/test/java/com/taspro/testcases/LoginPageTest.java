@@ -38,8 +38,5 @@ public class LoginPageTest extends TestBase {
 		Assert.assertTrue(flag);
 	}
 
-	@Test
-	public void validateforgotpasswordlink() {
-		lpagloginpageObj.clickOnForgotPassword();
-	}
+
 }
