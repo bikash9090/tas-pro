@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -27,7 +26,7 @@ public class ExcelUtil {
 		}
 	}
 
-	public String[][] readExcel(String sheetName) {
+	public String[][] readExcelSheet(String sheetName) {
 
 		try {
 			workbook = new XSSFWorkbook(fis);
@@ -54,28 +53,6 @@ public class ExcelUtil {
 		return empDetail;
 	}
 
-	public String[][] readColumnData1(String sheetName, int colNum) { // column number starts from 0.
-		try {
-			workbook = new XSSFWorkbook(fis);
-		} catch (IOException e) {
-			System.out.println("Input output error occured during excel file operations.");
-			e.printStackTrace();
-		}
-
-		XSSFSheet sheet = workbook.getSheet(sheetName);
-
-		int lastRow = sheet.getLastRowNum();
-		String[][] empColData = new String[lastRow][1];
-
-		for (int i = 0; i < lastRow; i++) {
-			XSSFCell cellData = sheet.getRow(i + 1).getCell(colNum);
-			cellData.setCellType(CellType.STRING);
-			empColData[i][0] = cellData.toString();
-		}
-
-		return empColData;
-	}
-
 	public String[][] readColumnData(String sheetName, int colNum) { // column number starts from 0.
 		try {
 			workbook = new XSSFWorkbook(fis);
@@ -94,7 +71,6 @@ public class ExcelUtil {
 			cellData.setCellType(CellType.STRING);
 			empColData[i][0] = cellData.toString();
 		}
-
 		return empColData;
 	}
 }

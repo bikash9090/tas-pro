@@ -36,8 +36,8 @@ public class LoginPage extends PageBase {
 	/*---------------------------------------Custom actions---------------------------------------------------*/
 
 	public void loginToUserAccount(String email, String password) {
-		scrollAndEnterText(emailfield, email);                                                  
-		scrollAndEnterText(passwordfield, password);
+		scrollAndEnterTextTo(emailfield, email);                                                  
+		scrollAndEnterTextTo(passwordfield, password);
 		scrollAndClick(loginButton);
 	}
 	public void getErrorMessageText() {
@@ -50,11 +50,11 @@ public class LoginPage extends PageBase {
 	}
 	
 	public void enterEmail(String email) {
-		scrollAndEnterText(emailfield, email);
+		scrollAndEnterTextTo(emailfield, email);
 	}
 	
 	public void enterPassword(String password) {
-		scrollAndEnterText(passwordfield, password);
+		scrollAndEnterTextTo(passwordfield, password);
 	}
 	
 	public void clickOnLoginButton() {
