@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import com.taspro.base.PageBase;
 
@@ -61,17 +60,6 @@ public class OnBoardingPage extends PageBase {
 	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
 	private WebElement saveButton;
 
-	@FindBy(xpath = "//*[@id=\"hr-table\"]/tbody/tr/td[2]")
-	private List<WebElement> empNames;
-
-	@FindBy(xpath = "//button[normalize-space()='Ok']")
-	private WebElement deactivateOK;
-
-	@FindBy(xpath = "//span[@class=\"mat-simple-snack-bar-content\"]")
-	private WebElement deletionToast;
-
-	By deactivateEmpButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
-
 	@FindBy(xpath = "//a[contains(@class,'btn btn-danger border-0')]")
 	private WebElement cancelButton;
 
@@ -82,9 +70,13 @@ public class OnBoardingPage extends PageBase {
 	private List<WebElement> candidateNames;
 
 	@FindBy(xpath = "//button[contains(text(),'Ok')]")
-	WebElement alertOkBtn;
+	private WebElement alertOkBtn;
 
-	private By deleteButtonLocator = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
+	@FindBy(xpath = "//div[contains(@class,'mat-paginator-range-actions')]/child::button[2]")
+	private WebElement forwardPaginator;
+
+	private By deactivateEmpButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
+	private By deleteButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
 
 	/*------------------------------------Page initialization----------------------------------------------*/
 	public OnBoardingPage(WebDriver driver) {
@@ -100,22 +92,23 @@ public class OnBoardingPage extends PageBase {
 		clickOnScreen();
 	}
 
+	/*----------------------------------Add candidate form-----------------------------*/
 	public void enterCandidateName(String name) {
 		clickOnScreen();
 		waitForElementToBeVisible(candidateNameField);
-		scrollAndEnterText(candidateNameField, name);
+		scrollAndEnterTextTo(candidateNameField, name);
 	}
 
 	public void enterCandidateEmail(String email) {
-		scrollAndEnterText(candidateEmailField, email);
+		scrollAndEnterTextTo(candidateEmailField, email);
 	}
 
 	public void enterCandidatePhNo(String num) {
-		scrollAndEnterText(candidateMobNoField, num);
+		scrollAndEnterTextTo(candidateMobNoField, num);
 	}
 
 	public void enterCandidateRole(String role) {
-		scrollAndEnterText(candidateRoleField, role);
+		scrollAndEnterTextTo(candidateRoleField, role);
 	}
 
 	public void selectCandidateYearOfexp(String year) {
@@ -128,12 +121,12 @@ public class OnBoardingPage extends PageBase {
 		selectFromList(experianceListInMonth, month);
 	}
 
-	public void selecteExpectedCTC(String expctc) {
-		scrollAndEnterText(expectedCTCInput, expctc);
+	public void selectExpectedCTC(String expCTC) {
+		scrollAndEnterTextTo(expectedCTCInput, expCTC);
 	}
 
-	public void selectedcurrentCTC(String currctc) {
-		scrollAndEnterText(currentCTCInput, currctc);
+	public void selectCurrentCTC(String currCTC) {
+		scrollAndEnterTextTo(currentCTCInput, currCTC);
 	}
 
 	public void selectNoticePeriod(String noticePeriod) {
@@ -142,7 +135,7 @@ public class OnBoardingPage extends PageBase {
 
 	}
 
-	public String clickSaveButton() {
+	public String clickOnSaveButton() {
 
 		try {
 			scrollAndClick(saveButton);
@@ -159,34 +152,40 @@ public class OnBoardingPage extends PageBase {
 		scrollAndClick(cancelButton);
 	}
 
-	public void clickDeactivateButton(String employename) {
-		for (WebElement name : empNames) {
-			if (name.getText().toLowerCase().equalsIgnoreCase(employename)) {
-				scrollAndClick(name.findElement(deactivateEmpButton));
+	/*----------------------------------Deactivate candidate-----------------------------*/
+	public void clickOnDeactivateButtonOfCandidate(String employename) {
+		for (WebElement cname : candidateNames) {
+			if (cname.getText().toLowerCase().equalsIgnoreCase(employename)) {
+				flashAndClick(cname.findElement(deactivateEmpButton));
 				break;
 			}
 		}
 	}
 
-	public void clickOnDeactivateOK() {
+	public Boolean acceptDeactivateCandidateDialogue() {
+		waitForElementToBeVisible(alertOkBtn);
+		flashAndClick(alertOkBtn);
 		waitForPageLoad(3000);
-		waitForElementToBeVisible(deactivateOK);
-		waitForElemetTBeClickable(deactivateOK);
-		scrollAndClick(deactivateOK);
+		waitForElementToBeVisible(messagePopUp);
+		if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deactivated Successfully")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public void deletionToastMsg() {
-		waitForElementToBeVisible(deletionToast);
-		String tstmsg = deletionToast.getText();
-		Assert.assertEquals(tstmsg, "Candidate Deactivated Successfully");
-	}
-
+	/*----------------------------------Deletion of candidate-----------------------------*/
 	public void clickOnDeleteButtonOfCandidate(String candidateName) {
+		Boolean elementFound = false;
 		for (WebElement cname : candidateNames) {
 			if (cname.getText().toLowerCase().equalsIgnoreCase(candidateName)) {
-				scrollAndClick(cname.findElement(deleteButtonLocator));
+				scrollAndClick(cname.findElement(deleteButton));
+				elementFound = true;
 				break;
 			}
+		}
+		if (!elementFound) {
+			// To do if the name not found the page.
 		}
 	}
 
@@ -194,7 +193,7 @@ public class OnBoardingPage extends PageBase {
 		waitForElementToBeVisible(alertOkBtn);
 		alertOkBtn.click();
 		waitForPageLoad(3000);
-		waitForElementTobeInvisible(messagePopUp);
+		waitForElementToBeVisible(messagePopUp);
 		if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deleted Successfully")) {
 			return true;
 		} else {
