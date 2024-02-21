@@ -48,7 +48,7 @@ public class OnBoardingPageTest extends TestBase {
 
 	@DataProvider(name = "empOnBrdData")
 	public String[][] onBoardData() {
-		return excelObj.readExcel("OnBoardData");
+		return excelObj.readExcelSheet("OnBoardData");
 	}
 
 	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "userAccountLoginTest")
@@ -61,47 +61,49 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.enterCandidateRole(role);
 		onBoardingPageobj.selectCandidateYearOfexp(yrofexp);
 		onBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
-		onBoardingPageobj.selectedcurrentCTC(currCTC);
-		onBoardingPageobj.selecteExpectedCTC(expCTC);
+		onBoardingPageobj.selectCurrentCTC(currCTC);
+		onBoardingPageobj.selectExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
 
-		String message = onBoardingPageobj.clickSaveButton();
+		String message = onBoardingPageobj.clickOnSaveButton();
 		onBoardingPageobj.refreshDom();
 		onBoardingPageobj.clickAddCandiateButton();
 		Assert.assertEquals(message, "Candidate Added Successfully", "Data not saved... ");
 
 	}
 
-	@DataProvider
+	@Test
+	public void userLogin() {
+		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
+		dashboardPageobj.clickOnOnboardingTab();
+	}
+
+	@DataProvider(name = "nameData")
 	public String[][] namaData() {
 		excelObj = new ExcelUtil();
-		return excelObj.readExcel("OnBoardData");
+		return excelObj.readExcelSheet("delEmpData");
 	}
 
-	@Test(dataProvider = "nameData")
-	public void onBoardedCandidateDeletionTest(String name) {
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		dashboardPageobj.clickOnOnboardingTab();
-		onBoardingPageobj.clickOnDeleteButtonOfCandidate(name);
+	@Test(dependsOnMethods = "userLogin")
+	public void onBoardedCandidateDeletionTest() {
+		onBoardingPageobj.clickOnDeleteButtonOfCandidate("Okey");
 
-		Boolean flag = onBoardingPageobj.acceptDeleteCandidateDialogue();
-		Assert.assertTrue(flag);
+		Boolean deletionStatus = onBoardingPageobj.acceptDeleteCandidateDialogue();
+		Assert.assertTrue(deletionStatus);
 	}
 
-//	@DataProvider(name="empDelData")
-//	
-//	public String[][] delempData() {
-//		 return excelObj.readExcel("delEmpData");	
-//	}
+	@DataProvider(name = "empDelData")
 
-	@Test
-	public void toVerifyDeactivateEmployee() {
-		String employeeName = "Abhi";
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		dashboardPageobj.clickOnOnboardingTab();
-		onBoardingPageobj.clickDeactivateButton(employeeName);
-		onBoardingPageobj.clickOnDeactivateOK();
-		onBoardingPageobj.deletionToastMsg();
+	public String[][] delempData() {
+		return excelObj.readExcelSheet("delEmpData");
 	}
 
+	@Test(dataProvider = "empDelData", dependsOnMethods = "userLogin")
+	public void toVerifyDeactivateEmployee(String name) {
+
+		onBoardingPageobj.clickOnDeactivateButtonOfCandidate(name);
+
+		Boolean deactiveStatus = onBoardingPageobj.acceptDeactivateCandidateDialogue();
+		Assert.assertTrue(deactiveStatus);
+	}
 }
