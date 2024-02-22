@@ -31,16 +31,17 @@ public class DriverFactory {
 			if (prop.getBrowser().toLowerCase().equalsIgnoreCase("chrome")) {
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
-				tl.set(driver);
+
 			} else if (prop.getBrowser().toLowerCase().equalsIgnoreCase("edge")) {
 				WebDriverManager.edgedriver().setup();
 				driver = new EdgeDriver();
-				tl.set(driver);
+
 			} else if (prop.getBrowser().toLowerCase().equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
 				driver = new FirefoxDriver();
-				tl.set(driver);
+
 			}
+			tl.set(driver);
 		}
 		return getDriver();
 	}
