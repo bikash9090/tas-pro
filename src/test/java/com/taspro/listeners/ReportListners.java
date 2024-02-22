@@ -1,16 +1,10 @@
 package com.taspro.listeners;
 
-import java.io.IOException;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import com.taspro.base.DriverFactory;
-import com.taspro.base.PageBase;
-import com.taspro.base.TestBase;
 import com.taspro.utility.ScreenShotUtil;
 
 public class ReportListners implements ITestListener {
