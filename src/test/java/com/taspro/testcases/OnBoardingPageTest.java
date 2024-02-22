@@ -65,11 +65,10 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.selectExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
 
-		String message = onBoardingPageobj.clickOnSaveButton();
+		Boolean saveStatus = onBoardingPageobj.clickOnSaveButton();
 		onBoardingPageobj.refreshDom();
 		onBoardingPageobj.clickAddCandiateButton();
-		Assert.assertEquals(message, "Candidate Added Successfully", "Data not saved... ");
-
+		Assert.assertTrue(saveStatus);
 	}
 
 	@Test
@@ -86,8 +85,8 @@ public class OnBoardingPageTest extends TestBase {
 
 	@Test(dependsOnMethods = "userLogin")
 	public void onBoardedCandidateDeletionTest() {
-		onBoardingPageobj.clickOnDeleteButtonOfCandidate("Okey");
 
+		onBoardingPageobj.clickOnDeleteButtonOfCandidate("Okey");
 		Boolean deletionStatus = onBoardingPageobj.acceptDeleteCandidateDialogue();
 		Assert.assertTrue(deletionStatus);
 	}
@@ -102,7 +101,6 @@ public class OnBoardingPageTest extends TestBase {
 	public void toVerifyDeactivateEmployee(String name) {
 
 		onBoardingPageobj.clickOnDeactivateButtonOfCandidate(name);
-
 		Boolean deactiveStatus = onBoardingPageobj.acceptDeactivateCandidateDialogue();
 		Assert.assertTrue(deactiveStatus);
 	}
