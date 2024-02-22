@@ -1,26 +1,20 @@
 package com.taspro.listeners;
 
-import java.io.IOException;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.taspro.base.PageBase;
-import com.taspro.base.TestBase;
+import com.taspro.base.DriverFactory;
 import com.taspro.utility.ScreenShotUtil;
 
-public class ReportListners extends PageBase implements ITestListener {
+public class ReportListners implements ITestListener {
 	
-	public ReportListners(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-	}
+//	public ReportListners(WebDriver driver) {
+//		PageFactory.initElements(driver, this);
+//	}
   
 	
-	WebDriver driver;
+	
 	ScreenShotUtil scrUtil;
 
 	@Override
@@ -37,7 +31,7 @@ public class ReportListners extends PageBase implements ITestListener {
 
 	@Override
 	public void onTestFailure(ITestResult result) {
-		scrUtil = new ScreenShotUtil(driver);
+		scrUtil = new ScreenShotUtil(DriverFactory.getDriverFactoryInstance().getDriver());
 		scrUtil.takeScreenShot();
 		ITestListener.super.onTestFailure(result);
 	}
@@ -62,7 +56,6 @@ public class ReportListners extends PageBase implements ITestListener {
 
 	@Override
 	public void onStart(ITestContext context) {
-		// TODO Auto-generated method stub
 		ITestListener.super.onStart(context);
 	}
 
