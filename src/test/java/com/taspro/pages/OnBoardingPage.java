@@ -135,16 +135,20 @@ public class OnBoardingPage extends PageBase {
 
 	}
 
-	public String clickOnSaveButton() {
+	public Boolean clickOnSaveButton() {
 
 		try {
 			scrollAndClick(saveButton);
 			waitForElementToBeVisible(messagePopUp);
-			return messagePopUp.getText();
+			if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Added Successfully")) {
+				return true;
+			} else {
+				return false;
+			}
 		} catch (TimeoutException e) {
 			System.out.println("The 'Save' button is not clickable!");
 			clickOnCancelButton();
-			return null;
+			return false;
 		}
 	}
 
