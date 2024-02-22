@@ -24,7 +24,7 @@ public class TestBase {
 
 	/*------------------------------------------------Browser Setup----------------------------------------------*/
 	public void setUp() {
-		driver = DriverFactory.getDriverFactoryInstance().initializeDriver();
+		driver = DriverFactory.getDriverFactoryInstance().initializeDriver(browser);
 
 	}
 
