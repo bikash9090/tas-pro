@@ -29,17 +29,6 @@ public class LoginPageTest extends TestBase {
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
 	@Test
-	public void loginFunTest() {
-
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-	}
-
-	@Test
-	public void validateforgotpasswordlink() {
-		lpagloginpageObj.clickOnForgotPassword();
-	}
-
-	@Test
 	public void userLoginTest() {
 		lpagloginpageObj.enterEmail("an2119@checkboxtechnology.com");
 		lpagloginpageObj.enterPassword("Aniket@123");
@@ -48,5 +37,6 @@ public class LoginPageTest extends TestBase {
 		boolean flag = dpage.isLoginSuccessful("https://tas2.checkboxtechnology.com/dashboard");
 		Assert.assertTrue(flag);
 	}
+
 
 }

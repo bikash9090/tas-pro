@@ -1,9 +1,8 @@
 package com.taspro.testcases;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,12 +27,13 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj = new OnBoardingPage(driver);
 		lpagloginpageObj = new LoginPage(driver);
 		dashboardPageobj = new DashboardPage(driver);
+		excelObj = new ExcelUtil();
 	}
 
 	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
 	@AfterClass
 	public void close() {
-		//tearDown();
+		// tearDown();
 	}
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
@@ -48,12 +48,11 @@ public class OnBoardingPageTest extends TestBase {
 
 	@DataProvider(name = "empOnBrdData")
 	public String[][] onBoardData() {
-		excelObj = new ExcelUtil();
-		return excelObj.readExcel("OnBoardData");
+		return excelObj.readExcelSheet("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData",dependsOnMethods = "userAccountLoginTest")
-	public void toVerifyEmteringCandidateDetails(String name, String email, String phno, String role, String yrofexp,
+	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "userAccountLoginTest")
+	public void candidateOnBoardingTest(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
 
 		onBoardingPageobj.enterCandidateName(name);
@@ -62,13 +61,47 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.enterCandidateRole(role);
 		onBoardingPageobj.selectCandidateYearOfexp(yrofexp);
 		onBoardingPageobj.selectCandidateMonthOfexp(mnofexp);
-		onBoardingPageobj.selectedcurrentCTC(currCTC);
-		onBoardingPageobj.selecteExpectedCTC(expCTC);
+		onBoardingPageobj.selectCurrentCTC(currCTC);
+		onBoardingPageobj.selectExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
-		onBoardingPageobj.clickSaveButton();
+
+		Boolean saveStatus = onBoardingPageobj.clickOnSaveButton();
 		onBoardingPageobj.refreshDom();
 		onBoardingPageobj.clickAddCandiateButton();
-
+		Assert.assertTrue(saveStatus);
 	}
 
+	@Test
+	public void userLogin() {
+		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
+		dashboardPageobj.clickOnOnboardingTab();
+	}
+
+	@DataProvider(name = "nameData")
+	public String[][] namaData() {
+		excelObj = new ExcelUtil();
+		return excelObj.readExcelSheet("delEmpData");
+	}
+
+	@Test(dependsOnMethods = "userLogin")
+	public void onBoardedCandidateDeletionTest() {
+
+		onBoardingPageobj.clickOnDeleteButtonOfCandidate("Okey");
+		Boolean deletionStatus = onBoardingPageobj.acceptDeleteCandidateDialogue();
+		Assert.assertTrue(deletionStatus);
+	}
+
+	@DataProvider(name = "empDelData")
+
+	public String[][] delempData() {
+		return excelObj.readExcelSheet("delEmpData");
+	}
+
+	@Test(dataProvider = "empDelData", dependsOnMethods = "userLogin")
+	public void toVerifyDeactivateEmployee(String name) {
+
+		onBoardingPageobj.clickOnDeactivateButtonOfCandidate(name);
+		Boolean deactiveStatus = onBoardingPageobj.acceptDeactivateCandidateDialogue();
+		Assert.assertTrue(deactiveStatus);
+	}
 }
