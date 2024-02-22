@@ -5,15 +5,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.taspro.utility.PropertiesUtil;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 
-	private static final PropertiesUtil prop = new PropertiesUtil();
 	private static final DriverFactory instance = new DriverFactory();
-
 	private static ThreadLocal<WebDriver> tl = new ThreadLocal<WebDriver>();
 
 	private DriverFactory() {
@@ -24,19 +20,19 @@ public class DriverFactory {
 		return instance;
 	}
 
-	public WebDriver initializeDriver() {
+	public WebDriver initializeDriver(String browserName) {
 		WebDriver driver = null;
 		if (driver == null) {
 
-			if (prop.getBrowser().toLowerCase().equalsIgnoreCase("chrome")) {
+			if (browserName.toLowerCase().equalsIgnoreCase("chrome")) {
 				WebDriverManager.chromedriver().setup();
 				driver = new ChromeDriver();
 
-			} else if (prop.getBrowser().toLowerCase().equalsIgnoreCase("edge")) {
+			} else if (browserName.toLowerCase().equalsIgnoreCase("edge")) {
 				WebDriverManager.edgedriver().setup();
 				driver = new EdgeDriver();
 
-			} else if (prop.getBrowser().toLowerCase().equalsIgnoreCase("firefox")) {
+			} else if (browserName.toLowerCase().equalsIgnoreCase("firefox")) {
 				WebDriverManager.firefoxdriver().setup();
 				driver = new FirefoxDriver();
 
