@@ -37,7 +37,7 @@ public class ForgotPasswordPage extends PageBase {
 	}
 
 	public void sendRecoveryEmail(String recoveryemail) {
-		scrollAndEnterText(revoceryEmail, recoveryemail);
+		scrollAndEnterTextTo(revoceryEmail, recoveryemail);
 
 	}
 
