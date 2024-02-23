@@ -54,7 +54,7 @@ public class DriverFactory {
 	}
 
 	//To quite the browser instance and set the ThreadLocal to null.
-	public void quitDriver() {
+	public void closeDriver() {
 		getDriver().quit();
 		tl.set(null);
 	}
