@@ -15,7 +15,7 @@ public class PropertiesUtil {
 		String path = Constants.PROPERTIES_FILE_PATH;
 		FileInputStream filepa;
 		pro = new Properties();
-    
+
 		try {
 			filepa = new FileInputStream(path);
 			pro.load(filepa);
@@ -43,5 +43,17 @@ public class PropertiesUtil {
 
 	public String getBrowser() {
 		return pro.getProperty("browser");
+	}
+
+	public String setHeadless() {
+		return pro.getProperty("headless");
+	}
+	
+	public String disableInfoBar() {
+		return pro.getProperty("infobar");
+	}
+	
+	public String setIncognito() {
+		return pro.getProperty("incognito");
 	}
 }
