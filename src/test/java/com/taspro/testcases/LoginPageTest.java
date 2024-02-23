@@ -16,7 +16,6 @@ public class LoginPageTest extends TestBase {
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
-		setUp();
 		launchWebSite();
 		lpagloginpageObj = new LoginPage(driver);
 		dpage = new DashboardPage(driver);
