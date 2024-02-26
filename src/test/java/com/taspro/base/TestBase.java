@@ -23,7 +23,7 @@ public class TestBase {
 
 	/*-------------------------------------------------CLOSING THE BROWSER----------------------------------------------*/
 	public void tearDown() {
-		DriverFactory.getDriverFactoryInstance().quitDriver();
+		DriverFactory.getDriverFactoryInstance().closeDriver();
 	}
 
 }
