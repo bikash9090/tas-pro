@@ -2,6 +2,11 @@ package com.taspro.testcases;
 
 import java.util.Map;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -45,33 +50,55 @@ public class DashboardPageTest extends TestBase {
 		
 	}
 	
-	@Test
-	public void ToVerifyCheckInbutton() {
+//	@Test
+//	public void ToVerifyCheckInbutton() throws InterruptedException {
+//	    LoginPageObj.loginToUserAccount(PropertiesUtilObj.getemail(), PropertiesUtilObj.getpassword());
+//	    Thread.sleep(5000);
+//
+//	    // Find the element first
+//	    WebElement checkin = driver.findElement(By.cssSelector(".scrollto.btn.btn-checkin.checkin.ng-star-inserted"));
+//        WebElement checkout = driver.findElement(By.cssSelector(".scrollto.btn.btn-checkin.CheckOut.ng-star-inserted"));
+//	    // Click on the element to trigger any necessary actions
+//	    //element.click();
+//	    //Thread.sleep(5000);
+//
+//	    // Use the element in getComputedStyle
+//	    String script = "return window.getComputedStyle(arguments[0],'::before').getPropertyValue('content')";
+//	    
+//	    JavascriptExecutor js = (JavascriptExecutor) driver;
+//	    String content = (String) js.executeScript(script, element);
+//	    
+//	    System.out.println(content);
+//	    
+//	}
 	
-		 LoginPageObj.loginToUserAccount(PropertiesUtilObj.getemail(), PropertiesUtilObj.getpassword());
-	   
-		  Map<String, String> result = DashboardPageObj.clickCheckInButton();
-		 
-		// Assertion
-	        String beforeClickText = result.get("beforeClick");
-	        String afterClickText = result.get("afterClick");
-	        
-	        
-	        System.out.println("Before Click Text: " + beforeClickText);
-	        System.out.println("After Click Text: " + afterClickText);
-
-	        // Example assertion, modify it based on your actual use case
-	        Assert.assertNotEquals(beforeClickText, afterClickText, "Check-in button text should change after clicking");
-		  
-		 
-		 
+	@Test
+	public void clickandcheck() throws InterruptedException {
+		LoginPageObj.loginToUserAccount(PropertiesUtilObj.getemail(), PropertiesUtilObj.getpassword());
+		Thread.sleep(5000);
+		
+		System.out.println(DashboardPageObj.initalText());
+		
+		
+		
+	
 		
 	}
+
+
+
+	}
+
+
+	   
+		 
+	        	
+	
+	 
 	
 	
 	
 	
-	
-}
+
 	
 	

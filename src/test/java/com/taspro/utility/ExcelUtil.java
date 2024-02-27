@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -11,16 +13,22 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.taspro.base.Constants;
 
+
+
 public class ExcelUtil {
 
 	XSSFWorkbook workbook;
 	FileInputStream fis;
+	private  Logger log  = LogManager.getLogger(ExcelUtil.class.getName());
 
 	public ExcelUtil() {
 		String path = Constants.EXCEL_PATH;
 		try {
+			log.info("reading the excel file from the path provided");
 			fis = new FileInputStream(path);
 		} catch (FileNotFoundException e) {
+			
+			log.error("excel file not found");
 			System.out.println("Excel file not found! on the location : " + path);
 			e.printStackTrace();
 		}
