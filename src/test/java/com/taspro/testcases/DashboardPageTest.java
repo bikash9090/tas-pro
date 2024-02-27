@@ -78,6 +78,7 @@ public class DashboardPageTest extends TestBase {
 		Thread.sleep(5000);
 		
 		System.out.println(DashboardPageObj.initalText());
+		System.out.println(DashboardPageObj.finalText());
 		
 		
 		

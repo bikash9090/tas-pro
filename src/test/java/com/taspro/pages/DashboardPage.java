@@ -70,7 +70,7 @@ public class DashboardPage extends PageBase {
 	}
 
 	public String getCheckinBtnText() {
-		waitForElementToBeVisible(checkInbutton);
+		//waitForElementToBeVisible(checkInbutton);
 		String script = "return window.getComputedStyle(arguments[0],'::before').getPropertyValue('content')";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String checkintext = (String) js.executeScript(script, checkInbutton);
@@ -79,7 +79,7 @@ public class DashboardPage extends PageBase {
 	}
 
 	public String getCheckoutBtnText() {
-		waitForElementToBeVisible(checkOutButton);
+		//waitForElementToBeVisible(checkOutButton);
 		String script = "return window.getComputedStyle(arguments[0],'::before').getPropertyValue('content')";
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String checkouttext = (String) js.executeScript(script, checkOutButton);
@@ -104,6 +104,29 @@ public class DashboardPage extends PageBase {
 			// Handle exception if checkOutButton is not present
 		}
 		return "NOBUTTON";
+		
+	}
+	public String finalText( ) throws InterruptedException {
+		try {
+			if (checkInbutton.isDisplayed()) {
+				checkInbutton.click();
+				Thread.sleep(8000);
+				return getCheckoutBtnText();
+			}
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+
+		}
+
+		try {
+			if (checkOutButton.isDisplayed()) {
+				checkOutButton.click();
+				Thread.sleep(8000);
+				return getCheckinBtnText();
+			}
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			// Handle exception if checkOutButton is not present
+		}
+		return "DIDNOTCLICK";
 		
 	}
 	
