@@ -182,14 +182,34 @@ public class OnBoardingPage extends PageBase {
 	public void clickOnDeleteButtonOfCandidate(String candidateName) {
 		Boolean elementFound = false;
 		for (WebElement cname : candidateNames) {
+			System.out.println(cname.getText());
 			if (cname.getText().toLowerCase().equalsIgnoreCase(candidateName)) {
 				scrollAndClick(cname.findElement(deleteButton));
 				elementFound = true;
 				break;
 			}
 		}
+		// If candidate not found on current page, navigate to the next page and try again
 		if (!elementFound) {
-			// To do if the name not found the page.
+			try {
+				scrollAndClick(forwardPaginator); // Navigate to next page
+				waitForMiliSec(500);
+				clickOnDeleteButtonOfCandidate(candidateName); // Recursive call to continue searching on the next page
+			} catch (TimeoutException e) {
+				refreshDom();
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void deleteAllOnboardedCandidate() {
+		for (WebElement cname : candidateNames) {
+			if (!candidateNames.isEmpty()) {
+				scrollAndClick(cname.findElement(deleteButton));
+				acceptDeleteCandidateDialogue();
+				refreshDom();
+				deleteAllOnboardedCandidate();
+			}
 		}
 	}
 
