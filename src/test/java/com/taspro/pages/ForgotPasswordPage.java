@@ -32,8 +32,14 @@ public class ForgotPasswordPage extends PageBase {
 
 	/*---------------------------------------Custom actions---------------------------------------------------*/
 
-	public void clickOnForgotPassword() {
+	public boolean clickOnForgotPassword() {
 		scrollAndClick(forgotPasswordButton);
+		waitForElementToBeVisible(sendLinkButton);
+		if(sendLinkButton.isDisplayed()) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public void sendRecoveryEmail(String recoveryemail) {
