@@ -1,20 +1,18 @@
 package com.taspro.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import java.util.HashMap;
-import java.util.Map;
+
 import com.taspro.base.PageBase;
 
 public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Page objects----------------------------------------------*/
+	@FindBy(xpath = "//*[@id=\"header\"]/div/div[3]/nav/ul/li[1]/button")
+	private WebElement attendanceBtn;
+
 	@FindBy(css = ".scrollto.btn.btn-checkin.checkin.ng-star-inserted")
 	private WebElement checkInbutton;
 
@@ -69,66 +67,27 @@ public class DashboardPage extends PageBase {
 		return profileDetails.getText();
 	}
 
-	public String getCheckinBtnText() {
-		//waitForElementToBeVisible(checkInbutton);
-		String script = "return window.getComputedStyle(arguments[0],'::before').getPropertyValue('content')";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String checkintext = (String) js.executeScript(script, checkInbutton);
-		return checkintext;
+	public void clickCheckInBtn() {
+		String currentBtnText = getCssTextOfElement(attendanceBtn);
 
+		if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check In\"")) {
+			flashAndClick(attendanceBtn);
+		} else if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check Out\"")) {
+			System.out.println("Employee has already checked in");
+		} else {
+			System.out.println("Text not matched!");
+		}
 	}
 
-	public String getCheckoutBtnText() {
-		//waitForElementToBeVisible(checkOutButton);
-		String script = "return window.getComputedStyle(arguments[0],'::before').getPropertyValue('content')";
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String checkouttext = (String) js.executeScript(script, checkOutButton);
-		return checkouttext;
+	public void clickCheckOutBtn() {
+		String currentBtnText = getCssTextOfElement(attendanceBtn);
 
+		if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check Out\"")) {
+			flashAndClick(attendanceBtn);
+		} else if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check In\"")) {
+			System.out.println("Employee has not Checked In yet!");
+		} else {
+			System.out.println("Text not matched!");
+		}
 	}
-
-	public String initalText( ) {
-		try {
-			if (checkInbutton.isDisplayed()) {
-				return getCheckinBtnText();
-			}
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-
-		}
-
-		try {
-			if (checkOutButton.isDisplayed()) {
-				return getCheckoutBtnText();
-			}
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-			// Handle exception if checkOutButton is not present
-		}
-		return "NOBUTTON";
-		
-	}
-	public String finalText( ) throws InterruptedException {
-		try {
-			if (checkInbutton.isDisplayed()) {
-				checkInbutton.click();
-				Thread.sleep(8000);
-				return getCheckoutBtnText();
-			}
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-
-		}
-
-		try {
-			if (checkOutButton.isDisplayed()) {
-				checkOutButton.click();
-				Thread.sleep(8000);
-				return getCheckinBtnText();
-			}
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-			// Handle exception if checkOutButton is not present
-		}
-		return "DIDNOTCLICK";
-		
-	}
-	
-
 }
