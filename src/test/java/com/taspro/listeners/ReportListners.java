@@ -8,13 +8,7 @@ import com.taspro.base.DriverFactory;
 import com.taspro.utility.ScreenShotUtil;
 
 public class ReportListners implements ITestListener {
-	
-//	public ReportListners(WebDriver driver) {
-//		PageFactory.initElements(driver, this);
-//	}
-  
-	
-	
+		
 	ScreenShotUtil scrUtil;
 
 	@Override

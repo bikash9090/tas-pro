@@ -20,9 +20,9 @@ public class DashboardPage extends PageBase {
 
 	@FindBy(xpath = "//i[@class='bi bi-person']")
 	private WebElement profileIcon;
-	
-	@FindBy(xpath="//span[@class=\"uxg-caption\"]")
-	private WebElement  profileDetails;
+
+	@FindBy(xpath = "//i[@class='bi bi-person']")
+	private WebElement profileDetails;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
 	private WebElement onBoardingTab;
@@ -35,16 +35,17 @@ public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Custom actions---------------------------------------------------*/
 
-	 public boolean isLoginSuccessful(String url) {
-			
-		 if(driver.getCurrentUrl().equals(url)) {
-			 return true;
-		 }else {
-			 return false;
+	public boolean isLoginSuccessful(String url) {
+
+		waitForElementToBeVisible(profileIcon);
+		if (driver.getCurrentUrl().equals(url)) {
+			return true;
+		} else {
+			return false;
 		}
-		
-	 }
-	
+
+	}
+
 	public void clickOnoNtificationbutton() {
 		scrollAndClick(notificationIcon);
 	}
@@ -58,10 +59,11 @@ public class DashboardPage extends PageBase {
 		waitForElementToBeVisible(onBoardingTab);
 		scrollAndClick(onBoardingTab);
 	}
+
 	public String getUsername() {
 		return profileDetails.getText();
 	}
-	
+
 //	public String clickCheckInButton() {
 //		String beforeclick = checkInbutton.getText();
 //		checkInbutton.click();
@@ -70,26 +72,23 @@ public class DashboardPage extends PageBase {
 //		return beforeclick;
 //return afterclick;
 //	}
-	
-
 
 	public Map<String, String> clickCheckInButton() {
-	    Map<String, String> result = new HashMap<>();
-	    
-        waitForElementToBeVisible(checkInbutton);
-        waitForElemetTBeClickable(checkInbutton);
-	    String beforeClick = checkInbutton.getText();
-	    
-	    checkInbutton.click();
-	    waitForPageLoad(5000);
-	    waitForElementToBeVisible(checkInbutton);
-	    String afterClick = checkInbutton.getText();
+		Map<String, String> result = new HashMap<>();
 
-	    result.put("beforeClick", beforeClick);
-	    result.put("afterClick", afterClick);
+		waitForElementToBeVisible(checkInbutton);
+		waitForElemetTBeClickable(checkInbutton);
+		String beforeClick = checkInbutton.getText();
 
-	    return result;
+		checkInbutton.click();
+		waitForPageLoad(5000);
+		waitForElementToBeVisible(checkInbutton);
+		String afterClick = checkInbutton.getText();
+
+		result.put("beforeClick", beforeClick);
+		result.put("afterClick", afterClick);
+
+		return result;
 	}
-
 
 }

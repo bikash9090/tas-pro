@@ -7,12 +7,11 @@
   <test thread-count="5" name="Test">
 	  
     <classes>
-      <class name="com.taspro.testcases.LoginPageTest">
+      <class name="com.taspro.testcases.OnBoardingPageTest">
 		  <methods>
-			  <parameter name="loginFunTest" value=""></parameter>
+			  <include name="onBoardedCandidateDeletionTest"/>
+			  <include name="userLogin"/>
 		  </methods>
-		  
-		  
 	  </class>
     </classes>
   </test> <!-- Test -->
