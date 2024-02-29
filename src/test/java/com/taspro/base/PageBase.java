@@ -45,7 +45,7 @@ public class PageBase {
 		js.executeScript("arguments[0].setAttribute('style','background: yellow; border: solid 5px red')", element);
 
 		try {
-			Thread.sleep(0);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			System.out.println("Interruputed exception occured! during flash operation.");
 			e.printStackTrace();
