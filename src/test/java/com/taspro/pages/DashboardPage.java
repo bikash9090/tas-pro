@@ -13,12 +13,6 @@ public class DashboardPage extends PageBase {
 	@FindBy(xpath = "//*[@id=\"header\"]/div/div[3]/nav/ul/li[1]/button")
 	private WebElement attendanceBtn;
 
-	@FindBy(css = ".scrollto.btn.btn-checkin.checkin.ng-star-inserted")
-	private WebElement checkInbutton;
-
-	@FindBy(css = ".scrollto.btn.btn-checkin.CheckOut.ng-star-inserted")
-	WebElement checkOutButton;
-
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/header/div/div[3]/nav/ul/li[2]/a/i")
 	private WebElement notificationIcon;
 
