@@ -45,7 +45,7 @@ public class PageBase {
 		js.executeScript("arguments[0].setAttribute('style','background: yellow; border: solid 5px red')", element);
 
 		try {
-			Thread.sleep(500);
+			Thread.sleep(0);
 		} catch (InterruptedException e) {
 			System.out.println("Interruputed exception occured! during flash operation.");
 			e.printStackTrace();
@@ -163,6 +163,15 @@ public class PageBase {
 
 	protected void waitForElementTobeInvisible(WebElement element) {
 		wait.until(ExpectedConditions.invisibilityOf(element));
+	}
+
+	public void waitForMiliSec(long miliSec) {
+		try {
+			Thread.sleep(miliSec);
+		} catch (InterruptedException e) {
+			System.out.println("Interruped exception occured! while sleeping.");
+			e.printStackTrace();
+		}
 	}
 
 }

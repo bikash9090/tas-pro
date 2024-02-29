@@ -8,52 +8,49 @@ import org.testng.annotations.Test;
 import com.taspro.base.TestBase;
 import com.taspro.pages.ForgotPasswordPage;
 
-public class ForgotPasswordTest extends TestBase{
-	
-	ForgotPasswordPage ForgotPasswordPageobj;
+public class ForgotPasswordTest extends TestBase {
 
+	ForgotPasswordPage fpage;
 
-
-/*------------------------------------------------BeforClass initialization----------------------------------------------*/
+	/*------------------------------------BeforClass initialization----------------------------------------*/
 	@BeforeClass
-public void initialization() {
-	launchWebSite();
-	ForgotPasswordPageobj= new ForgotPasswordPage(driver);
-	
-}
-	
-	
-	/*------------------------------------------------Closing the browser after the test ----------------------------------------------*/
+	public void initialization() {
+		launchWebSite();
+		fpage = new ForgotPasswordPage(driver);
+
+	}
+
+	/*----------------------------------Closing the browser after the test ---------------------------------*/
 	@AfterClass
 	public void close() {
 		tearDown();
 	}
-	
+
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
 
 	@Test
 	public void clickOnForgotPassword() {
-		ForgotPasswordPageobj.clickOnForgotPassword();	
-}
+		boolean fpageLoadStatus = fpage.clickOnForgotPassword();
+		Assert.assertTrue(fpageLoadStatus);
+	}
+
 	@Test
 	public void verifyUserIsRedirectedToForgotPasswordPage() {
-		ForgotPasswordPageobj.clickOnForgotPassword();
+		fpage.clickOnForgotPassword();
 		String expctectedURl = "https://tas2.checkboxtechnology.com/login/resetpassword";
-		String actualurl = ForgotPasswordPageobj.getForgotPasswordURl();
-		Assert.assertEquals(expctectedURl, actualurl,"Forgot Password page URL doesnot match");
-	
+		String actualurl = fpage.getForgotPasswordURl();
+		Assert.assertEquals(expctectedURl, actualurl, "Forgot Password page URL doesnot match");
+
 	}
+
 	@Test
 	public void toVerifyRecoveryEmailSent() {
-		ForgotPasswordPageobj.clickOnForgotPassword();
-		ForgotPasswordPageobj.sendRecoveryEmail("an2119@checkboxtechnology.com");
-		ForgotPasswordPageobj.ClickOnsendRecoveryemail();
-		String popup = ForgotPasswordPageobj.getEmailSentConfirmation();
+		fpage.clickOnForgotPassword();
+		fpage.sendRecoveryEmail("an2119@checkboxtechnology.com");
+		fpage.ClickOnsendRecoveryemail();
+		String popup = fpage.getEmailSentConfirmation();
 		Assert.assertEquals(popup, "if given email Id is registered, mail is sent to you", "Recovery email not sent");
-		
+
 	}
-	
-	
-	
 
 }

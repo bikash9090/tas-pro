@@ -28,6 +28,7 @@ public class DashboardPage extends PageBase {
 	@FindBy(xpath = "//span[@class=\"uxg-caption\"]")
 	private WebElement profileDetails;
 
+
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
 	private WebElement onBoardingTab;
 
@@ -38,9 +39,9 @@ public class DashboardPage extends PageBase {
 	}
 
 	/*----------------------------------------Custom actions---------------------------------------------------*/
+	public boolean isLoginSuccessful(String url) {
 
-	public boolean isLoginSuccessful(String url) {
-
+		waitForElementToBeVisible(profileIcon);
 		if (driver.getCurrentUrl().equals(url)) {
 			return true;
 		} else {
