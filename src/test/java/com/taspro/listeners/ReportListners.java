@@ -4,17 +4,26 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.taspro.base.DriverFactory;
 import com.taspro.utility.ScreenShotUtil;
 
 public class ReportListners implements ITestListener {
-		
+	
+	private static ExtentReports report = ExtentReportManager.initReport();
+	public static ExtentTest test;
 	ScreenShotUtil scrUtil;
 
 	@Override
 	public void onTestStart(ITestResult result) {
-		// TODO Auto-generated method stub
+		
 		ITestListener.super.onTestStart(result);
+		
+		test = report.createTest("Test Method", result.getMethod().getDescription());
+		test.assignCategory(result.getTestContext().getSuite().getName());
+		test.log(Status.PASS, "Test started");
 	}
 
 	@Override
@@ -55,7 +64,7 @@ public class ReportListners implements ITestListener {
 
 	@Override
 	public void onFinish(ITestContext context) {
-		// TODO Auto-generated method stub
+		report.flush();
 		ITestListener.super.onFinish(context);
 	}
 
