@@ -15,7 +15,7 @@ public class Constants {
 	
 	//----------------------Report initialization data------------------------//
 	public static final String DOCUMENT_TITLE = "TAS-Pro Automation report";
-	public static final String CUSTOMER_NAME = "Ameracan Client";
+	public static final String CUSTOMER_NAME = "American Client";
 	public static final String APPLICATION = "TAS-Pro";
 	public static final String OPERATING_SYSTEM = System.getProperty("os.name");
 	public static final String USER_NAME = System.getProperty("user.name");
