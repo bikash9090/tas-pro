@@ -11,59 +11,60 @@ import com.taspro.base.DriverFactory;
 import com.taspro.utility.ScreenShotUtil;
 
 public class ReportListners implements ITestListener {
-	
+
 	private static ExtentReports report = ExtentReportManager.initReport();
 	public static ExtentTest test;
 	ScreenShotUtil scrUtil;
 
 	@Override
-	public void onTestStart(ITestResult result) {
-		
-		ITestListener.super.onTestStart(result);
-		
-		test = report.createTest("Test Method", result.getMethod().getDescription());
+	public synchronized void onTestStart(ITestResult result) {
+		test = report.createTest(result.getMethod().getMethodName());
 		test.assignCategory(result.getTestContext().getSuite().getName());
-		test.log(Status.PASS, "Test started");
 	}
 
 	@Override
-	public void onTestSuccess(ITestResult result) {
-		System.out.println(result.getMethod()+" Test passes...");
-		ITestListener.super.onTestSuccess(result);
+	public synchronized void onTestSuccess(ITestResult result) {
+		test.log(Status.PASS, "Test passed.");
 	}
 
 	@Override
-	public void onTestFailure(ITestResult result) {
+	public synchronized void onTestFailure(ITestResult result) {
 		scrUtil = new ScreenShotUtil(DriverFactory.getDriverFactoryInstance().getDriver());
-		scrUtil.takeScreenShot();
-		ITestListener.super.onTestFailure(result);
+
+		test.addScreenCaptureFromPath(scrUtil.takeScreenShot(result.getMethod().getMethodName()));
+		test.log(Status.FAIL, "Test Failed.");
+		test.log(Status.FAIL, result.getThrowable());
+		
 	}
 
 	@Override
-	public void onTestSkipped(ITestResult result) {
-		// TODO Auto-generated method stub
-		ITestListener.super.onTestSkipped(result);
+	public synchronized void onTestSkipped(ITestResult result) {
+		scrUtil = new ScreenShotUtil(DriverFactory.getDriverFactoryInstance().getDriver());
+
+		test.addScreenCaptureFromPath(scrUtil.takeScreenShot(result.getMethod().getMethodName()));
+		test.log(Status.SKIP, "Test skipped.");
+		test.log(Status.SKIP, result.getThrowable());
 	}
 
 	@Override
-	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		// TODO Auto-generated method stub
 		ITestListener.super.onTestFailedButWithinSuccessPercentage(result);
 	}
 
 	@Override
-	public void onTestFailedWithTimeout(ITestResult result) {
+	public synchronized void onTestFailedWithTimeout(ITestResult result) {
 		// TODO Auto-generated method stub
 		ITestListener.super.onTestFailedWithTimeout(result);
 	}
 
 	@Override
-	public void onStart(ITestContext context) {
-		ITestListener.super.onStart(context);
+	public synchronized void onStart(ITestContext context) {
+
 	}
 
 	@Override
-	public void onFinish(ITestContext context) {
+	public synchronized void onFinish(ITestContext context) {
 		report.flush();
 		ITestListener.super.onFinish(context);
 	}
