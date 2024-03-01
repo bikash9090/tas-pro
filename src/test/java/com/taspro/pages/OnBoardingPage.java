@@ -13,196 +13,251 @@ import com.taspro.base.PageBase;
 
 public class OnBoardingPage extends PageBase {
 
-	/*------------------------------------------------Page objects----------------------------------------------*/
+    /*---------------------------------------Page objects----------------------------------------------*/
 
-	@FindBy(xpath = "/html/body/app-root/app-onboarding-list/div/div[2]/div/div/div/a[1]")
-	private WebElement addCandiateButton;
+    // Add Candidate Button
+    @FindBy(xpath = "/html/body/app-root/app-onboarding-list/div/div[2]/div/div/div/a[1]")
+    private WebElement addCandiateButton;
 
-	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]")
-	private WebElement addCandidateForm;
+    // Add Candidate Form
+    @FindBy(xpath = "//*[@id=\"mat-dialog-0\"]")
+    private WebElement addCandidateForm;
 
-	@FindBy(xpath = "//input[@class='form-control ng-pristine ng-invalid has-error ng-touched']")
-	private WebElement candidateNameField;
+    // Candidate Name Field
+    @FindBy(xpath = "//input[@class='form-control ng-pristine ng-invalid has-error ng-touched']")
+    private WebElement candidateNameField;
 
-	@FindBy(xpath = "//input[@type='email']")
-	private WebElement candidateEmailField;
+    // Candidate Email Field
+    @FindBy(xpath = "//input[@type='email']")
+    private WebElement candidateEmailField;
 
-	@FindBy(xpath = "//input[@placeholder='081234 56789']")
-	private WebElement candidateMobNoField;
+    // Candidate Mobile Number Field
+    @FindBy(xpath = "//input[@placeholder='081234 56789']")
+    private WebElement candidateMobNoField;
 
-	@FindBy(xpath = "//input[@formcontrolname='role']")
-	private WebElement candidateRoleField;
+    // Candidate Role Field
+    @FindBy(xpath = "//input[@formcontrolname='role']")
+    private WebElement candidateRoleField;
 
-	@FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/child::div[1]/descendant::div[2]")
-	private WebElement candidateExpInYear;
+    // Candidate Experience in Year
+    @FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/child::div[1]/descendant::div[2]")
+    private WebElement candidateExpInYear;
 
-	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
-	private List<WebElement> experianceListInYear;
+    // List of Experience in Years
+    @FindBy(xpath = "//span[@class=\"mat-option-text\"]")
+    private List<WebElement> experianceListInYear;
 
-	@FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/following::div[1]/child::div/descendant::div[3]")
-	private WebElement candidateExpInMonth;
+    // Candidate Experience in Month
+    @FindBy(xpath = "//div[@class='form-group']//div[@class='form-group']/following::div[1]/child::div/descendant::div[3]")
+    private WebElement candidateExpInMonth;
 
-	@FindBy(xpath = "//span[@class='mat-option-text']")
-	private List<WebElement> experianceListInMonth;
+    // List of Experience in Months
+    @FindBy(xpath = "//span[@class='mat-option-text']")
+    private List<WebElement> experianceListInMonth;
 
-	@FindBy(xpath = "//input[@formcontrolname='curr_ctc']")
-	private WebElement currentCTCInput;
+    // Current CTC Input Field
+    @FindBy(xpath = "//input[@formcontrolname='curr_ctc']")
+    private WebElement currentCTCInput;
 
-	@FindBy(xpath = "//input[@formcontrolname='expected_ctc']")
-	private WebElement expectedCTCInput;
+    // Expected CTC Input Field
+    @FindBy(xpath = "//input[@formcontrolname='expected_ctc']")
+    private WebElement expectedCTCInput;
 
-	@FindBy(xpath = "//div[@id='mat-select-value-7']")
-	private WebElement noticePeriodField;
+    // Notice Period Field
+    @FindBy(xpath = "//div[@id='mat-select-value-7']")
+    private WebElement noticePeriodField;
 
-	@FindBy(xpath = "//span[@class=\"mat-option-text\"]")
-	private List<WebElement> noticePeriosList;
+    // List of Notice Periods
+    @FindBy(xpath = "//span[@class=\"mat-option-text\"]")
+    private List<WebElement> noticePeriosList;
 
-	@FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
-	private WebElement saveButton;
+    // Save Button
+    @FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
+    private WebElement saveButton;
 
-	@FindBy(xpath = "//a[contains(@class,'btn btn-danger border-0')]")
-	private WebElement cancelButton;
+    // Cancel Button
+    @FindBy(xpath = "//a[contains(@class,'btn btn-danger border-0')]")
+    private WebElement cancelButton;
 
-	@FindBy(xpath = "//span[contains(@class,'mat-simple-snack-bar-content')]")
-	private WebElement messagePopUp;
+    // Message Pop-up Element
+    @FindBy(xpath = "//span[contains(@class,'mat-simple-snack-bar-content')]")
+    private WebElement messagePopUp;
 
-	@FindBy(xpath = "//*[@id=\"hr-table\"]/tbody/tr/td[2]")
-	private List<WebElement> candidateNames;
+    // List of Candidate Names
+    @FindBy(xpath = "//*[@id=\"hr-table\"]/tbody/tr/td[2]")
+    private List<WebElement> candidateNames;
 
-	@FindBy(xpath = "//button[contains(text(),'Ok')]")
-	private WebElement alertOkBtn;
+    // Alert Ok Button
+    @FindBy(xpath = "//button[contains(text(),'Ok')]")
+    private WebElement alertOkBtn;
 
-	@FindBy(xpath = "//div[contains(@class,'mat-paginator-range-actions')]/child::button[2]")
-	private WebElement forwardPaginator;
+    // Forward Paginator Button
+    @FindBy(xpath = "//div[contains(@class,'mat-paginator-range-actions')]/child::button[2]")
+    private WebElement forwardPaginator;
 
-	private By deactivateEmpButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
-	private By deleteButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
+    private By deactivateEmpButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[3]");
+    private By deleteButton = By.xpath("./following-sibling::td[contains(@class,'text-center')]/a[1]");
 
-	/*------------------------------------Page initialization----------------------------------------------*/
-	public OnBoardingPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(driver, this);
-	}
+    /*------------------------------------Page initialization----------------------------------------------*/
+    public OnBoardingPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
 
-	/*---------------------------------------Custom actions---------------------------------------------------*/
-	public void clickAddCandiateButton() {
+    /*---------------------------------------Custom actions---------------------------------------------------*/
 
-		waitForElementToBeVisible(addCandiateButton);
-		scrollAndClick(addCandiateButton);
-		clickOnScreen();
-	}
+    // Click Add Candidate Button and open the form
+    public void clickAddCandiateButton() {
+        waitForElementToBeVisible(addCandiateButton); // Wait for the Add Candidate button to be visible
+        scrollAndClick(addCandiateButton); // Scroll to the Add Candidate button and click it
+        clickOnScreen(); // Click on the screen to dismiss any overlays
+    }
 
-	/*----------------------------------Add candidate form-----------------------------*/
-	public void enterCandidateName(String name) {
-		clickOnScreen();
-		waitForElementToBeVisible(candidateNameField);
-		scrollAndEnterTextTo(candidateNameField, name);
-	}
+    // Enter Candidate Name in the form
+    public void enterCandidateName(String name) {
+        clickOnScreen(); // Dismiss any overlays
+        waitForElementToBeVisible(candidateNameField); // Wait for the Candidate Name field to be visible
+        scrollAndEnterTextTo(candidateNameField, name); // Scroll to the Candidate Name field and enter the provided name
+    }
 
-	public void enterCandidateEmail(String email) {
-		scrollAndEnterTextTo(candidateEmailField, email);
-	}
+    // Enter Candidate Email in the form
+    public void enterCandidateEmail(String email) {
+        scrollAndEnterTextTo(candidateEmailField, email); // Scroll to the Candidate Email field and enter the provided email
+    }
 
-	public void enterCandidatePhNo(String num) {
-		scrollAndEnterTextTo(candidateMobNoField, num);
-	}
+    // Enter Candidate Phone Number in the form
+    public void enterCandidatePhNo(String num) {
+        scrollAndEnterTextTo(candidateMobNoField, num); // Scroll to the Candidate Phone Number field and enter the provided number
+    }
 
-	public void enterCandidateRole(String role) {
-		scrollAndEnterTextTo(candidateRoleField, role);
-	}
+    // Enter Candidate Role in the form
+    public void enterCandidateRole(String role) {
+        scrollAndEnterTextTo(candidateRoleField, role); // Scroll to the Candidate Role field and enter the provided role
+    }
 
-	public void selectCandidateYearOfexp(String year) {
-		scrollAndClick(candidateExpInYear);
-		selectFromList(experianceListInYear, year);
-	}
+    // Select Candidate Year of Experience in the form
+    public void selectCandidateYearOfexp(String year) {
+        scrollAndClick(candidateExpInYear); // Scroll to the Candidate Year of Experience field and click it
+        selectFromList(experianceListInYear, year); // Select the provided year of experience from the list
+    }
 
-	public void selectCandidateMonthOfexp(String month) {
-		scrollAndClick(candidateExpInMonth);
-		selectFromList(experianceListInMonth, month);
-	}
+    // Select Candidate Month of Experience in the form
+    public void selectCandidateMonthOfexp(String month) {
+        scrollAndClick(candidateExpInMonth); // Scroll to the Candidate Month of Experience field and click it
+        selectFromList(experianceListInMonth, month); // Select the provided month of experience from the list
+    }
 
-	public void selectExpectedCTC(String expCTC) {
-		scrollAndEnterTextTo(expectedCTCInput, expCTC);
-	}
+    // Select Expected CTC in the form
+    public void selectExpectedCTC(String expCTC) {
+        scrollAndEnterTextTo(expectedCTCInput, expCTC); // Scroll to the Expected CTC field and enter the provided expected CTC
+    }
 
-	public void selectCurrentCTC(String currCTC) {
-		scrollAndEnterTextTo(currentCTCInput, currCTC);
-	}
+    // Select Current CTC in the form
+    public void selectCurrentCTC(String currCTC) {
+        scrollAndEnterTextTo(currentCTCInput, currCTC); // Scroll to the Current CTC field and enter the provided current CTC
+    }
 
-	public void selectNoticePeriod(String noticePeriod) {
-		scrollAndClick(noticePeriodField);
-		selectFromList(noticePeriosList, noticePeriod);
+    // Select Notice Period in the form
+    public void selectNoticePeriod(String noticePeriod) {
+        scrollAndClick(noticePeriodField); // Scroll to the Notice Period field and click it
+        selectFromList(noticePeriosList, noticePeriod); // Select the provided notice period from the list
+    }
 
-	}
+    // Click on Save Button in the form
+    public Boolean clickOnSaveButton() {
+        try {
+            scrollAndClick(saveButton); // Scroll to the Save button and click it
+            waitForElementToBeVisible(messagePopUp); // Wait for the message pop-up to appear
+            if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Added Successfully")) {
+                return true; // If the success message is displayed, return true
+            } else {
+                return false; // If the success message is not displayed, return false
+            }
+        } catch (TimeoutException e) {
+            System.out.println("The 'Save' button is not clickable!"); // Log if the 'Save' button is not clickable
+            clickOnCancelButton(); // If not clickable, click on Cancel button
+            return false; // Return false as save action failed
+        }
+    }
 
-	public Boolean clickOnSaveButton() {
+    // Click on Cancel Button in the form
+    public void clickOnCancelButton() {
+        scrollAndClick(cancelButton); // Scroll to the Cancel button and click it
+    }
 
-		try {
-			scrollAndClick(saveButton);
-			waitForElementToBeVisible(messagePopUp);
-			if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Added Successfully")) {
-				return true;
-			} else {
-				return false;
-			}
-		} catch (TimeoutException e) {
-			System.out.println("The 'Save' button is not clickable!");
-			clickOnCancelButton();
-			return false;
-		}
-	}
+    /*----------------------------------Deactivate candidate-----------------------------*/
 
-	public void clickOnCancelButton() {
-		scrollAndClick(cancelButton);
-	}
+    // Click on Deactivate Button of Candidate
+    public void clickOnDeactivateButtonOfCandidate(String employename) {
+        for (WebElement cname : candidateNames) {
+            if (cname.getText().toLowerCase().equalsIgnoreCase(employename)) {
+                flashAndClick(cname.findElement(deactivateEmpButton));
+                break;
+            }
+        }
+    }
 
-	/*----------------------------------Deactivate candidate-----------------------------*/
-	public void clickOnDeactivateButtonOfCandidate(String employename) {
-		for (WebElement cname : candidateNames) {
-			if (cname.getText().toLowerCase().equalsIgnoreCase(employename)) {
-				flashAndClick(cname.findElement(deactivateEmpButton));
-				break;
-			}
-		}
-	}
+    // Accept Deactivate Candidate Dialogue
+    public Boolean acceptDeactivateCandidateDialogue() {
+        waitForElementToBeVisible(alertOkBtn);
+        flashAndClick(alertOkBtn);
+        waitForPageLoad(3000);
+        waitForElementToBeVisible(messagePopUp);
+        if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deactivated Successfully")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	public Boolean acceptDeactivateCandidateDialogue() {
-		waitForElementToBeVisible(alertOkBtn);
-		flashAndClick(alertOkBtn);
-		waitForPageLoad(3000);
-		waitForElementToBeVisible(messagePopUp);
-		if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deactivated Successfully")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    /*----------------------------------Deletion of candidate-----------------------------*/
 
-	/*----------------------------------Deletion of candidate-----------------------------*/
-	public void clickOnDeleteButtonOfCandidate(String candidateName) {
-		Boolean elementFound = false;
-		for (WebElement cname : candidateNames) {
-			if (cname.getText().toLowerCase().equalsIgnoreCase(candidateName)) {
-				scrollAndClick(cname.findElement(deleteButton));
-				elementFound = true;
-				break;
-			}
-		}
-		if (!elementFound) {
-			// To do if the name not found the page.
-		}
-	}
+    // Click on Delete Button of Candidate
+    public void clickOnDeleteButtonOfCandidate(String candidateName) {
+        Boolean elementFound = false;
+        for (WebElement cname : candidateNames) {
+            System.out.println(cname.getText());
+            if (cname.getText().toLowerCase().equalsIgnoreCase(candidateName)) {
+                scrollAndClick(cname.findElement(deleteButton));
+                elementFound = true;
+                break;
+            }
+        }
+        // If candidate not found on current page, navigate to the next page and try again
+        if (!elementFound) {
+            try {
+                scrollAndClick(forwardPaginator); // Navigate to next page
+                waitForMiliSec(500);
+                clickOnDeleteButtonOfCandidate(candidateName); // Recursive call to continue searching on the next page
+            } catch (TimeoutException e) {
+                refreshDom();
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public Boolean acceptDeleteCandidateDialogue() {
-		waitForElementToBeVisible(alertOkBtn);
-		alertOkBtn.click();
-		waitForPageLoad(3000);
-		waitForElementToBeVisible(messagePopUp);
-		if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deleted Successfully")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    // Delete All Onboarded Candidate
+    public void deleteAllOnboardedCandidate() {
+        for (WebElement cname : candidateNames) {
+            if (!candidateNames.isEmpty()) {
+                scrollAndClick(cname.findElement(deleteButton));
+                acceptDeleteCandidateDialogue();
+                refreshDom();
+                deleteAllOnboardedCandidate();
+            }
+        }
+    }
 
+    // Accept Delete Candidate Dialogue
+    public Boolean acceptDeleteCandidateDialogue() {
+        waitForElementToBeVisible(alertOkBtn);
+        alertOkBtn.click();
+        waitForPageLoad(3000);
+        waitForElementToBeVisible(messagePopUp);
+        if (messagePopUp.getText().toLowerCase().equalsIgnoreCase("Candidate Deleted Successfully")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -40,7 +40,7 @@ public class DashboardPage extends PageBase {
 	/*----------------------------------------Custom actions---------------------------------------------------*/
 
 	public boolean isLoginSuccessful(String url) {
-
+		waitForElementToBeVisible(profileIcon);
 		if (driver.getCurrentUrl().equals(url)) {
 			return true;
 		} else {

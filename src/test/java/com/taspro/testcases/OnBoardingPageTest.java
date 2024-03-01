@@ -80,15 +80,20 @@ public class OnBoardingPageTest extends TestBase {
 	@DataProvider(name = "nameData")
 	public String[][] namaData() {
 		excelObj = new ExcelUtil();
-		return excelObj.readExcelSheet("delEmpData");
+		return excelObj.readColumnData("OnBoardData", 0);
+	}
+
+	@Test(dependsOnMethods = "userLogin", dataProvider = "nameData")
+	public void onBoardedCandidateDeletionTest(String candName) {
+
+		onBoardingPageobj.clickOnDeleteButtonOfCandidate(candName);
+		Boolean deletionStatus = onBoardingPageobj.acceptDeleteCandidateDialogue();
+		Assert.assertTrue(deletionStatus);
 	}
 
 	@Test(dependsOnMethods = "userLogin")
-	public void onBoardedCandidateDeletionTest() {
-
-		onBoardingPageobj.clickOnDeleteButtonOfCandidate("Okey");
-		Boolean deletionStatus = onBoardingPageobj.acceptDeleteCandidateDialogue();
-		Assert.assertTrue(deletionStatus);
+	public void deleteAllOnBoardedCandidateTest() {
+		onBoardingPageobj.deleteAllOnboardedCandidate();		
 	}
 
 	@DataProvider(name = "empDelData")
