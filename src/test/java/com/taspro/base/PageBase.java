@@ -36,8 +36,7 @@ public class PageBase {
 	}
 
 	protected void scrollIntoView(WebElement element) {
-		jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",
-				element);
+		jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",element);
 	}
 
 	protected void flash(WebElement element) {
@@ -55,7 +54,15 @@ public class PageBase {
 		js.executeScript("arguments[0].setAttribute('style','border: solid 2px white')", element);
 
 	}
-	
+
+	protected String getCssTextOfElement(WebElement element) {
+		String script = "return window.getComputedStyle(arguments[0], '::before').getPropertyValue('content');";
+		waitForElementToBeVisible(element);
+		String text = (String) jsExecutor.executeScript(script, element);
+		
+		return text;
+	}
+
 	protected Boolean isEnabled(WebElement element) {
 		return element.isEnabled();
 	}
@@ -100,6 +107,8 @@ public class PageBase {
 	}
 
 	protected void flashAndClick(WebElement element) {
+		waitForElementToBeVisible(element);
+		waitForElemetTBeClickable(element);
 		flash(element);
 		element.click();
 	}

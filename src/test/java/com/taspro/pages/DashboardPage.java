@@ -4,16 +4,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.taspro.base.PageBase;
 
 public class DashboardPage extends PageBase {
 
 	/*----------------------------------------Page objects----------------------------------------------*/
-	@FindBy(xpath = "//button[@class='scrollto btn btn-checkin checkin ng-star-inserted']")
+	@FindBy(xpath = "//*[@id=\"header\"]/div/div[3]/nav/ul/li[1]/button")
+	private WebElement attendanceBtn;
+
+	@FindBy(css = ".scrollto.btn.btn-checkin.checkin.ng-star-inserted")
 	private WebElement checkInbutton;
+
+	@FindBy(css = ".scrollto.btn.btn-checkin.CheckOut.ng-star-inserted")
+	WebElement checkOutButton;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/header/div/div[3]/nav/ul/li[2]/a/i")
 	private WebElement notificationIcon;
@@ -21,7 +25,7 @@ public class DashboardPage extends PageBase {
 	@FindBy(xpath = "//i[@class='bi bi-person']")
 	private WebElement profileIcon;
 
-	@FindBy(xpath = "//i[@class='bi bi-person']")
+	@FindBy(xpath = "//span[@class=\"uxg-caption\"]")
 	private WebElement profileDetails;
 
 	@FindBy(xpath = "/html/body/app-root/app-dashboard/app-navbar/div/ul/li[2]/a")
@@ -36,7 +40,6 @@ public class DashboardPage extends PageBase {
 	/*----------------------------------------Custom actions---------------------------------------------------*/
 
 	public boolean isLoginSuccessful(String url) {
-
 		waitForElementToBeVisible(profileIcon);
 		if (driver.getCurrentUrl().equals(url)) {
 			return true;
@@ -64,31 +67,27 @@ public class DashboardPage extends PageBase {
 		return profileDetails.getText();
 	}
 
-//	public String clickCheckInButton() {
-//		String beforeclick = checkInbutton.getText();
-//		checkInbutton.click();
-//		waitForPageLoad(5000);
-//		String afterclick = checkInbutton.getText();	
-//		return beforeclick;
-//return afterclick;
-//	}
+	public void clickCheckInBtn() {
+		String currentBtnText = getCssTextOfElement(attendanceBtn);
 
-	public Map<String, String> clickCheckInButton() {
-		Map<String, String> result = new HashMap<>();
-
-		waitForElementToBeVisible(checkInbutton);
-		waitForElemetTBeClickable(checkInbutton);
-		String beforeClick = checkInbutton.getText();
-
-		checkInbutton.click();
-		waitForPageLoad(5000);
-		waitForElementToBeVisible(checkInbutton);
-		String afterClick = checkInbutton.getText();
-
-		result.put("beforeClick", beforeClick);
-		result.put("afterClick", afterClick);
-
-		return result;
+		if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check In\"")) {
+			flashAndClick(attendanceBtn);
+		} else if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check Out\"")) {
+			System.out.println("Employee has already checked in");
+		} else {
+			System.out.println("Text not matched!");
+		}
 	}
 
+	public void clickCheckOutBtn() {
+		String currentBtnText = getCssTextOfElement(attendanceBtn);
+
+		if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check Out\"")) {
+			flashAndClick(attendanceBtn);
+		} else if (currentBtnText.toLowerCase().equalsIgnoreCase("\"Check In\"")) {
+			System.out.println("Employee has not Checked In yet!");
+		} else {
+			System.out.println("Text not matched!");
+		}
+	}
 }
