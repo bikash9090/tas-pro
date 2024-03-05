@@ -48,14 +48,20 @@ public class ReportListners implements ITestListener {
 
 	@Override
 	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		// TODO Auto-generated method stub
-		ITestListener.super.onTestFailedButWithinSuccessPercentage(result);
+		scrUtil = new ScreenShotUtil(DriverFactory.getDriverFactoryInstance().getDriver());
+
+		test.addScreenCaptureFromPath(scrUtil.takeScreenShot(result.getMethod().getMethodName()));
+		test.log(Status.FAIL, "Test Failed with percentage");
+		test.log(Status.FAIL, result.getThrowable().getMessage());
 	}
 
 	@Override
 	public synchronized void onTestFailedWithTimeout(ITestResult result) {
-		// TODO Auto-generated method stub
-		ITestListener.super.onTestFailedWithTimeout(result);
+		scrUtil = new ScreenShotUtil(DriverFactory.getDriverFactoryInstance().getDriver());
+
+		test.addScreenCaptureFromPath(scrUtil.takeScreenShot(result.getMethod().getMethodName()));
+		test.log(Status.FAIL, "Test Failed with TimeOut");
+		test.log(Status.FAIL, result.getThrowable().getMessage());
 	}
 
 	@Override
@@ -66,7 +72,6 @@ public class ReportListners implements ITestListener {
 	@Override
 	public synchronized void onFinish(ITestContext context) {
 		report.flush();
-		ITestListener.super.onFinish(context);
 	}
 
 }
