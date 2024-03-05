@@ -28,10 +28,10 @@ public class LoginPageTest extends TestBase {
 	}
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
-	@Test
+	@Test(testName = "Employee login")
 	public void userLoginTest() {
 		lpagloginpageObj.enterEmail("an2119@checkboxtechnology.com");
-		lpagloginpageObj.enterPassword("Aniket@123");
+		lpagloginpageObj.enterPassword("Aniket@1236");
 		lpagloginpageObj.clickOnLoginButton();
 		
 		boolean flag = dpage.isLoginSuccessful("https://tas2.checkboxtechnology.com/dashboard");

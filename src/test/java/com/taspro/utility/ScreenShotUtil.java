@@ -13,27 +13,27 @@ import org.openqa.selenium.WebDriver;
 import com.taspro.base.Constants;
 
 public class ScreenShotUtil {
-	
+
 	WebDriver driver;
-	
-	
-	String timeStamp = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
-	
-	public ScreenShotUtil(WebDriver driver){
+
+	public ScreenShotUtil(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	public void takeScreenShot()  {
-		File f = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\src\\test\\java\\com\\taspro\\utility\\ScreenshotUtil\\screenshot.png"));
-		//FileUtils.copyFile(f, new File(System.getProperty("user.dir")+"\\Screenshots\\"+timeStamp+"screenshot.png"));
+
+	public String takeScreenShot(String testName) {
+
+		String timeStamp = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
+		File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String destination = Constants.SCREENSHOT_DIR + testName + "_" + timeStamp + ".png";
+
 		try {
-			FileUtils.copyFile(f, new File(Constants.SCREENSHOT_DIR+timeStamp+"screenshot.png"));
+			FileUtils.copyFile(source, new File(destination));
+			return destination;
 		} catch (IOException e) {
-			System.out.println("File IO exception occured! during copying the screenshot to path : "+Constants.SCREENSHOT_DIR);
+			System.out.println(
+					"File IO exception occured! during copying the screenshot to path : " + Constants.SCREENSHOT_DIR);
 			e.printStackTrace();
+			return null;
 		}
-
 	}
-
 }
