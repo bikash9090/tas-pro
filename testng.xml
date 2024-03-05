@@ -12,6 +12,7 @@
 					<include name="userLoginTest" />
 				</methods>
 			</class>
+			<class name="com.taspro.testcases.OnBoardingPageTest"></class>
 		</classes>
 	</test> <!--
 	Test -->
