@@ -64,6 +64,7 @@ public class DashboardPage extends PageBase {
 	}
 
 	public String getUsername() {
+		waitForElementToBeVisible(profileDetails);
 		return profileDetails.getText();
 	}
 
