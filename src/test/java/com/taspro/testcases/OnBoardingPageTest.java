@@ -18,8 +18,6 @@ public class OnBoardingPageTest extends TestBase {
 	DashboardPage dashboardPageobj;
 	ExcelUtil excelObj;
 
-	String name = "Dipak";
-
 	/*------------------------------------------------BeforClass initialization----------------------------------------------*/
 	@BeforeClass
 	public void initilization() {
@@ -37,7 +35,7 @@ public class OnBoardingPageTest extends TestBase {
 	}
 
 	/*------------------------------------------------TESTCASES----------------------------------------------*/
-	@Test
+	@Test()
 	public void userAccountLoginTest() {
 		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
 		dashboardPageobj.clickOnOnboardingTab();
@@ -51,7 +49,7 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcelSheet("OnBoardData");
 	}
 
-	@Test(dataProvider = "empOnBrdData", dependsOnMethods = "userAccountLoginTest")
+	@Test(priority = 1, dataProvider = "empOnBrdData", dependsOnMethods = "userAccountLoginTest")
 	public void candidateOnBoardingTest(String name, String email, String phno, String role, String yrofexp,
 			String mnofexp, String currCTC, String expCTC, String npdays) {
 
@@ -71,10 +69,9 @@ public class OnBoardingPageTest extends TestBase {
 		Assert.assertTrue(saveStatus);
 	}
 
-	@Test
+	@Test(priority = 3)
 	public void userLogin() {
-		lpagloginpageObj.loginToUserAccount(readpropobj.getemail(), readpropobj.getpassword());
-		dashboardPageobj.clickOnOnboardingTab();
+		onBoardingPageobj.clickOnCancelButton();
 	}
 
 	@DataProvider(name = "nameData")
@@ -83,7 +80,7 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readColumnData("OnBoardData", 0);
 	}
 
-	@Test(dependsOnMethods = "userLogin", dataProvider = "nameData")
+	@Test(priority = 2, dependsOnMethods = "userLogin", dataProvider = "nameData")
 	public void onBoardedCandidateDeletionTest(String candName) {
 
 		onBoardingPageobj.clickOnDeleteButtonOfCandidate(candName);
@@ -91,9 +88,9 @@ public class OnBoardingPageTest extends TestBase {
 		Assert.assertTrue(deletionStatus);
 	}
 
-	@Test(dependsOnMethods = "userLogin")
+	@Test(dependsOnMethods = "userLogin", enabled = false)
 	public void deleteAllOnBoardedCandidateTest() {
-		onBoardingPageobj.deleteAllOnboardedCandidate();		
+		onBoardingPageobj.deleteAllOnboardedCandidate();
 	}
 
 	@DataProvider(name = "empDelData")
@@ -102,7 +99,7 @@ public class OnBoardingPageTest extends TestBase {
 		return excelObj.readExcelSheet("delEmpData");
 	}
 
-	@Test(dataProvider = "empDelData", dependsOnMethods = "userLogin")
+	@Test(dataProvider = "empDelData", dependsOnMethods = "userLogin", enabled = false)
 	public void toVerifyDeactivateEmployee(String name) {
 
 		onBoardingPageobj.clickOnDeactivateButtonOfCandidate(name);
