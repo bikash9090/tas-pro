@@ -1,22 +1,35 @@
 package com.taspro.stepdefinations;
 
+import com.taspro.base.TestBase;
+import com.taspro.pages.LoginPage;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class LoginPageStepDefination {
+public class LoginPageStepDefination extends TestBase {
+	LoginPage lpage;
+
 	@Given("User is on login page")
 	public void user_is_on_login_page() {
-		System.out.println("Given method : Open the URL.");
+		launchWebSite();
+		lpage = new LoginPage(driver);
+		System.out.println("Login page opened successfully.");
 	}
 
 	@When("User enter username and password")
 	public void user_enter_username_and_password() {
-		System.out.println("When method : Enter userid and password to the fields.");
+		lpage.enterEmail("an2119@checkboxtechnology.com");
+		lpage.enterPassword("Aniket@1236");
+	}
+	
+	@When("Click on Login button")
+	public void click_on_login_button() {
+	    lpage.clickOnLoginButton();
 	}
 
 	@Then("User is navigated to the DashBoardPage")
 	public void user_is_navigated_to_the_dash_board_page() {
-		System.out.println("Then method : Verify the login is succssfull or not!");
+		
 	}
 }
