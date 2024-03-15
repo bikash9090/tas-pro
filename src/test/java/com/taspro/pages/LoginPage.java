@@ -1,9 +1,11 @@
 package com.taspro.pages;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.taspro.base.PageBase;
 
@@ -19,11 +21,14 @@ public class LoginPage extends PageBase {
 	@FindBy(xpath = "/html/body/app-root/app-login/div/div[1]/div/form/div[3]/button")
 	private WebElement loginButton;
 
-	@FindBy(xpath = "//snack-bar-container[@class='mat-snack-bar-container ng-tns-c47-14 ng-trigger ng-trigger-state mat-snack-bar-center ng-star-inserted']")
-	private WebElement errorMessage;
+	@FindBy(xpath = "//span[contains(@class,'mat-simple-snack-bar-content')]")
+    private WebElement errorMessage;
 
 	@FindBy(xpath = "//a[@class='txt2']")
 	private WebElement forgotPassword;
+	
+	@FindBy(xpath = "//i[@class='bi bi-person']")
+	private WebElement profileIcon;
 
 	/*-------------------------------------------Page initialization----------------------------------------------*/
 
@@ -44,6 +49,22 @@ public class LoginPage extends PageBase {
 		waitForElementToBeVisible(errorMessage);
 		errorMessage.getText();
 
+	}
+	
+	public boolean isLoginSuccessfull() {
+		try {
+			waitForElementToBeVisible(errorMessage);
+			 if(errorMessage.getText().equalsIgnoreCase("Please enter valid credential")) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (TimeoutException e) {
+			waitForElementToBeVisible(profileIcon);
+			return profileIcon.isDisplayed();
+		}
+		
 	}
 
 	public void clickOnForgotPassword() {

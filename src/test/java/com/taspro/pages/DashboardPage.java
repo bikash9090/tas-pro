@@ -91,4 +91,11 @@ public class DashboardPage extends PageBase {
 			System.out.println("Text not matched!");
 		}
 	}
+
+	public boolean isProfileIconVisible() {
+		waitForElementToBeVisible(profileIcon);
+		return profileIcon.isDisplayed();
+
+	}
+
 }
