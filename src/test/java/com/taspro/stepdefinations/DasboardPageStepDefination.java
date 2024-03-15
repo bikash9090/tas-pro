@@ -26,8 +26,8 @@ public class DasboardPageStepDefination extends TestBase{
 
 	@When("User enters their email ID and password")
 	public void user_enters_their_email_id_and_password() {
-		lpage.enterEmail("an2119@checkboxtechnology.com");
-		lpage.enterPassword("Aniket@123");
+		lpage.enterEmail("davoleh227@comsb.com");
+		lpage.enterPassword("Abhi@123");
 	}
 
 	@When("User clicks on the login button")
