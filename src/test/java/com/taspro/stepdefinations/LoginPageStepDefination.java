@@ -14,7 +14,7 @@ public class LoginPageStepDefination extends TestBase {
 	LoginPage lpage;
 	DashboardPage dpage;
 
-	@Given("User is on login page")
+	@Given("Hr is on the login page")
 	public void user_is_on_login_page() {
 		launchWebSite();
 		lpage = new LoginPage(driver);
