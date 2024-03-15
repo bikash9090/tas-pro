@@ -15,7 +15,7 @@ public class DasboardPageStepDefination extends TestBase{
 	LoginPage lpage;
 	DashboardPage dpage;
 
-	@Given("User is on the login page")
+	@Given("usr is on the login page")
 	public void user_is_on_the_login_page() {
 			launchWebSite();
 			lpage = new LoginPage(driver);
@@ -30,7 +30,7 @@ public class DasboardPageStepDefination extends TestBase{
 		lpage.enterPassword("Abhi@123");
 	}
 
-	@When("User clicks on the login button")
+	@When("User clicks on the loginn button")
 	public void user_clicks_on_the_login_button() {
 		 lpage.clickOnLoginButton();
 	}
