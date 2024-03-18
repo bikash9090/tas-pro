@@ -70,6 +70,9 @@ public class OnBoardingPage extends PageBase {
     // List of Notice Periods
     @FindBy(xpath = "//span[@class=\"mat-option-text\"]")
     private List<WebElement> noticePeriosList;
+    
+    @FindBy(xpath = "//input[@type='file']")
+    private WebElement uploadResumeBtn;
 
     // Save Button
     @FindBy(xpath = "//*[@id=\"mat-dialog-0\"]/app-add-candidate/div/div/div[2]/form/div[11]/div/button")
@@ -162,6 +165,11 @@ public class OnBoardingPage extends PageBase {
         scrollAndClick(noticePeriodField); // Scroll to the Notice Period field and click it
         selectFromList(noticePeriosList, noticePeriod); // Select the provided notice period from the list
     }
+    
+    // Click and upload the resume of the candidate.
+    public void clickAndUploadResume() {
+		clickByJavaScript(uploadResumeBtn);
+	}
 
     // Click on Save Button in the form
     public Boolean clickOnSaveButton() {
@@ -260,4 +268,6 @@ public class OnBoardingPage extends PageBase {
             return false;
         }
     }
+
+	
 }
