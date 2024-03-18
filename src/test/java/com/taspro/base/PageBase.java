@@ -36,7 +36,11 @@ public class PageBase {
 	}
 
 	protected void scrollIntoView(WebElement element) {
-		jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",element);
+		if(element.isDisplayed()) {		
+	}
+		else {
+			jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",element);
+		}
 	}
 
 	protected void flash(WebElement element) {
