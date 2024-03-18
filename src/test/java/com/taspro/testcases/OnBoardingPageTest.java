@@ -1,5 +1,7 @@
 package com.taspro.testcases;
 
+import java.io.IOException;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -62,6 +64,13 @@ public class OnBoardingPageTest extends TestBase {
 		onBoardingPageobj.selectCurrentCTC(currCTC);
 		onBoardingPageobj.selectExpectedCTC(expCTC);
 		onBoardingPageobj.selectNoticePeriod(npdays);
+		onBoardingPageobj.clickAndUploadResume();
+		try {
+			Runtime.getRuntime().exec("E://Eclipse Projects//tas-pro//AutoIT-script//fileuploadscript.exe");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Boolean saveStatus = onBoardingPageobj.clickOnSaveButton();
 		onBoardingPageobj.refreshDom();
