@@ -36,11 +36,11 @@ public class PageBase {
 	}
 
 	protected void scrollIntoView(WebElement element) {
-		if(element.isDisplayed()) {		
-	}
-		else {
-			jsExecutor.executeScript("arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});",element);
+		if (!element.isDisplayed()) {
+			jsExecutor.executeScript(
+					"arguments[0].scrollIntoView({behavior: 'auto', block: 'center', inline: 'center'});", element);
 		}
+
 	}
 
 	protected void flash(WebElement element) {
@@ -63,7 +63,7 @@ public class PageBase {
 		String script = "return window.getComputedStyle(arguments[0], '::before').getPropertyValue('content');";
 		waitForElementToBeVisible(element);
 		String text = (String) jsExecutor.executeScript(script, element);
-		
+
 		return text;
 	}
 
